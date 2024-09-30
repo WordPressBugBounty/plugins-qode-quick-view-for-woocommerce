@@ -12,8 +12,8 @@ class Qode_Quick_View_For_WooCommerce_Framework_Options_Meta extends Qode_Quick_
 		add_action( 'wp_loaded', array( $this, 'populate_meta_box' ) );
 		add_action( 'add_meta_boxes', array( $this, 'meta_box_register' ) );
 		add_action( 'do_meta_boxes', array( $this, 'remove_default_custom_fields' ) );
-		add_filter( 'sanitize_post_meta_qode_quick_view_for_woocommerce_meta_option', array( $this, 'sanitize_meta_option' ) );
 		add_action( 'save_post', array( $this, 'meta_box_save' ), 1, 2 );
+		add_filter( 'sanitize_post_meta_qode_quick_view_for_woocommerce_meta_option', array( $this, 'sanitize_meta_option' ) );
 		// 5 is set to be same permission as Gutenberg plugin have.
 		add_action( 'admin_head', array( $this, 'enqueue_framework_meta_scripts' ), 5 );
 

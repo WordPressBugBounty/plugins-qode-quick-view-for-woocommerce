@@ -34,6 +34,9 @@ class Qode_Quick_View_For_WooCommerce_Framework_Options_Admin extends Qode_Quick
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_framework_options_scripts' ), 5 );
 
 		add_filter( 'admin_body_class', array( $this, 'add_admin_body_classes' ) );
+
+		add_action( 'all_admin_notices', array( $this, 'init_cpt_header' ) );
+		add_filter( 'post_row_actions', array( $this, 'modify_post_row_actions' ), 10, 1 );
 	}
 
 	public function get_menu_name() {
@@ -233,19 +236,93 @@ class Qode_Quick_View_For_WooCommerce_Framework_Options_Admin extends Qode_Quick
 	}
 
 	public function enqueue_framework_options_scripts() {
-		// check if page is options page.
-		// phpcs:ignore WordPress.Security.NonceVerification
-		if ( isset( $_GET['page'] ) && strpos( sanitize_text_field( wp_unslash( $_GET['page'] ) ), $this->get_menu_name() ) !== false ) {
+		if ( $this->allowed_screens() ) {
 			$this->enqueue_dashboard_framework_scripts();
 		}
 	}
 
 	public function add_admin_body_classes( $classes ) {
-		// phpcs:ignore WordPress.Security.NonceVerification
-		if ( isset( $_GET['page'] ) && strpos( sanitize_text_field( wp_unslash( $_GET['page'] ) ), $this->get_menu_name() ) !== false ) {
+		if ( $this->allowed_screens() ) {
 			$classes = $classes . ' qodef-framework-admin';
 		}
 
 		return $classes;
+	}
+
+	public function allowed_screens() {
+		// check if page is options page.
+		// phpcs:ignore WordPress.Security.NonceVerification
+		return ( isset( $_GET['page'] ) && strpos( sanitize_text_field( wp_unslash( $_GET['page'] ) ), $this->get_menu_name() ) !== false ) || $this->is_allowed_admin_cpt_page();
+	}
+
+	public function init_cpt_header() {
+		if ( $this->is_allowed_admin_cpt_page() ) {
+			?>
+			<div class="qodef-admin-page-v4 qodef-cpt-page qodef-admin-content">
+				<?php $this->render_navigation(); ?>
+				<div class="qodef-admin-content-wrapper">
+					<div class="qodef-admin-header">
+						<div class="qodef-header-left">
+							<div class="qodef-header-left-inner">
+								<a href="#" class="qodef-mobile-nav-opener">
+									<?php qode_quick_view_for_woocommerce_framework_svg_icon( 'opener', 'qodef-opener-icon' ); ?>
+								</a>
+								<div class="qodef-logo-holder">
+									<a href="https://qodeinteractive.com/products/plugins/" target="_blank">
+										<img src="<?php echo esc_url( QODE_QUICK_VIEW_FOR_WOOCOMMERCE_ADMIN_URL_PATH . '/inc/common/modules/admin/assets/img/logo-qode-interactive.png' ); ?>" alt="<?php esc_attr_e( 'Admin Qode Interactive image', 'qode-quick-view-for-woocommerce' ); ?>" height="47" />
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
+		}
+	}
+	/**
+	 * Function that modifies post row actions
+	 *
+	 * @return array Array of table row actions
+	 */
+	public function modify_post_row_actions( $actions ) {
+		if ( $this->is_allowed_admin_cpt_page() ) {
+			$new_actions = array();
+
+			// Loop through existing actions.
+			foreach ( $actions as $action => $link ) {
+				$svg_icon = qode_quick_view_for_woocommerce_get_svg_icon( $action );
+
+				// If there is a svg with said action, add it before closing tag.
+				if ( ! empty( $svg_icon ) ) {
+					$pattern                = '/(<\/a\s*>)/i';
+					$replacement            = qode_quick_view_for_woocommerce_get_svg_icon( $action, 'qodef-table-action-btn' ) . '$1';
+					$new_actions[ $action ] = preg_replace( $pattern, $replacement, $link );
+				} elseif ( 'inline hide-if-no-js' === $action ) {
+					$pattern                = '/(<\/button\s*>)/i';
+					$replacement            = qode_quick_view_for_woocommerce_get_svg_icon( 'quick-edit', 'qodef-table-action-btn' ) . '$1';
+					$new_actions[ $action ] = preg_replace( $pattern, $replacement, $link );
+				} else {
+					// Change nothing if there is no corresponding svg.
+					$new_actions[ $action ] = $link;
+				}
+			}
+
+			return $new_actions;
+		}
+
+		return $actions;
+	}
+
+	public function is_allowed_admin_cpt_page() {
+		global $pagenow;
+
+		$pages = apply_filters( 'qode_quick_view_for_woocommerce_filter_framework_nav_pages', array( 'post.php', 'post-new.php', 'edit.php' ) );
+		$cpts  = apply_filters( 'qode_quick_view_for_woocommerce_filter_framework_nav_cpts', array() );
+
+		// phpcs:ignore WordPress.Security.NonceVerification
+		$current_post_type = isset( $_GET['post_type'] ) ? sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) : get_post_type();
+
+		return is_admin() && in_array( $pagenow, $pages, true ) && in_array( $current_post_type, $cpts, true );
 	}
 }

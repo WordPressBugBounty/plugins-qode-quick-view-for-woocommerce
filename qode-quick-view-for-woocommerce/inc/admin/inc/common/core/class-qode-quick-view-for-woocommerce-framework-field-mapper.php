@@ -20,7 +20,7 @@ class Qode_Quick_View_For_WooCommerce_Framework_Field_Mapper implements Qode_Qui
 	}
 
 	public function render( $return_object = false, $post_id = null ) {
-		if ( 'taxonomy' === $this->type ) {
+		if ( 'taxonomy' === $this->type || 'product-attribute' === $this->type ) {
 			$class = 'Qode_Quick_View_For_WooCommerce_Framework_Field_WP_' . ucfirst( $this->params['field_type'] );
 		} elseif ( 'attachment' === $this->type ) {
 			$class = 'Qode_Quick_View_For_WooCommerce_Framework_Field_Attachment_' . ucfirst( $this->params['field_type'] );

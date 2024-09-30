@@ -203,10 +203,7 @@ abstract class Qode_Quick_View_For_WooCommerce_Framework_Widget extends WP_Widge
 						?>
 						<?php if ( ! empty( $option['description'] ) ) : ?>
 							<span class="qodef-field-description">
-								<?php
-								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-								echo qode_quick_view_for_woocommerce_framework_wp_kses_html( 'content', $option['description'] );
-								?>
+								<?php echo wp_kses_post( $option['description'] ); ?>
 							</span>
 						<?php endif; ?>
 					</p>

@@ -53,8 +53,8 @@ if ( $qqvfw_custom_query->have_posts() ) {
 					 * Hook: qode_quick_view_for_woocommerce_action_product_summary.
 					 *
 					 * @hooked woocommerce_template_single_title - 5
-					 * @hooked woocommerce_template_single_rating - 10
-					 * @hooked woocommerce_template_single_price - 15
+					 * @hooked woocommerce_template_single_price - 10
+					 * @hooked woocommerce_template_single_rating - 15
 					 * @hooked woocommerce_template_single_excerpt - 20
 					 * @hooked woocommerce_template_single_add_to_cart - 25
 					 * @hooked woocommerce_template_single_meta - 30

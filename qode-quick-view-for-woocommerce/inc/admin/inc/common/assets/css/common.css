@@ -1,6 +1,6 @@
 /* ==========================================================================
     Color variables - start
-	========================================================================== */
+   ========================================================================== */
 /* Input fields */
 [class*=qodef-page-v4].qodef-options-admin .qodef-checkbox-group-holder,
 [class*=qodef-page-v4].qodef-options-admin .qodef-radio-group-holder:not(.qodef-with-images), [class*=qodef-page-v4].qodef-options-meta .qodef-checkbox-group-holder,
@@ -137,10 +137,10 @@
 
 /* ==========================================================================
     Color variables - end
-	========================================================================== */
+   ========================================================================== */
 /* ==========================================================================
     Font mixins - start
-	========================================================================== */
+   ========================================================================== */
 @font-face {
 	font-family: 'Roboto';
 	src: url("../fonts/Roboto-Regular.ttf") format("truetype");
@@ -188,16 +188,16 @@
 /* This can be changed */
 /* ==========================================================================
     Font mixins - end
-	========================================================================== */
+   ========================================================================== */
 /* ==========================================================================
     Button mixins - start
-	========================================================================== */
+   ========================================================================== */
 /* ==========================================================================
     Button mixins - end
-	========================================================================== */
+   ========================================================================== */
 /* ==========================================================================
     Animation keyframes - begin
-	========================================================================== */
+   ========================================================================== */
 @keyframes qode-spin {
 	0% {
 		transform: rotate(0deg);
@@ -228,7 +228,7 @@
 
 /* ==========================================================================
     Animation keyframes - end
-	========================================================================== */
+   ========================================================================== */
 [class*=qodef-page-v4].qodef-options-admin, [class*=qodef-page-v4].qodef-options-meta, [class*=qodef-page-v4].qodef-options-front-end {
 	/*!
  * Bootstrap Grid v4.1.3 (https://getbootstrap.com/)
@@ -2221,6 +2221,10 @@
 	margin-bottom: 0;
 }
 
+[class*=qodef-page-v4].qodef-options-admin .qodef-field-section .wp-switch-editor, [class*=qodef-page-v4].qodef-options-meta .qodef-field-section .wp-switch-editor, [class*=qodef-page-v4].qodef-options-front-end .qodef-field-section .wp-switch-editor {
+	box-sizing: content-box;
+}
+
 [class*=qodef-page-v4].qodef-options-admin .qodef-dependency-holder, [class*=qodef-page-v4].qodef-options-meta .qodef-dependency-holder, [class*=qodef-page-v4].qodef-options-front-end .qodef-dependency-holder {
 	padding-left: 35px;
 }
@@ -2275,10 +2279,6 @@
 	margin: 0 0 28px;
 	color: #000000;
 	margin: 0 0 5px;
-}
-
-[class*=qodef-page-v4].qodef-options-admin .qodef-row-wrapper .qodef-repeater-wrapper .qodef-repeater-wrapper-inner, [class*=qodef-page-v4].qodef-options-meta .qodef-row-wrapper .qodef-repeater-wrapper .qodef-repeater-wrapper-inner, [class*=qodef-page-v4].qodef-options-front-end .qodef-row-wrapper .qodef-repeater-wrapper .qodef-repeater-wrapper-inner {
-	padding: 0 0 28px;
 }
 
 [class*=qodef-page-v4].qodef-options-admin .qodef-section-wrapper, [class*=qodef-page-v4].qodef-options-meta .qodef-section-wrapper, [class*=qodef-page-v4].qodef-options-front-end .qodef-section-wrapper {
@@ -2349,10 +2349,6 @@
 	padding-bottom: 0;
 }
 
-[class*=qodef-page-v4].qodef-options-admin .qodef-section-wrapper .qodef-repeater-wrapper .qodef-repeater-wrapper-inner, [class*=qodef-page-v4].qodef-options-meta .qodef-section-wrapper .qodef-repeater-wrapper .qodef-repeater-wrapper-inner, [class*=qodef-page-v4].qodef-options-front-end .qodef-section-wrapper .qodef-repeater-wrapper .qodef-repeater-wrapper-inner {
-	padding: 0 0 28px;
-}
-
 [class*=qodef-page-v4].qodef-options-admin .qodef-section-wrapper:last-child .qodef-section-wrapper-inner, [class*=qodef-page-v4].qodef-options-meta .qodef-section-wrapper:last-child .qodef-section-wrapper-inner, [class*=qodef-page-v4].qodef-options-front-end .qodef-section-wrapper:last-child .qodef-section-wrapper-inner {
 	border-bottom: none;
 	margin-bottom: 0;
@@ -2386,6 +2382,10 @@
 	background: none;
 	padding-bottom: 2px;
 	overflow: hidden;
+}
+
+[class*=qodef-page-v4].qodef-options-admin.qodef-tab-wrapper .qodef-tab-item-nav-wrapper.ps--active-x.qodef-drag li a, [class*=qodef-page-v4].qodef-options-admin.qodef-tab-wrapper .qodef-tab-item-nav-wrapper.ps--scrolling-x li a, [class*=qodef-page-v4].qodef-options-meta.qodef-tab-wrapper .qodef-tab-item-nav-wrapper.ps--active-x.qodef-drag li a, [class*=qodef-page-v4].qodef-options-meta.qodef-tab-wrapper .qodef-tab-item-nav-wrapper.ps--scrolling-x li a, [class*=qodef-page-v4].qodef-options-front-end.qodef-tab-wrapper .qodef-tab-item-nav-wrapper.ps--active-x.qodef-drag li a, [class*=qodef-page-v4].qodef-options-front-end.qodef-tab-wrapper .qodef-tab-item-nav-wrapper.ps--scrolling-x li a {
+	cursor: ew-resize;
 }
 
 [class*=qodef-page-v4].qodef-options-admin.qodef-tab-wrapper .qodef-tab-item-nav-wrapper:after, [class*=qodef-page-v4].qodef-options-meta.qodef-tab-wrapper .qodef-tab-item-nav-wrapper:after, [class*=qodef-page-v4].qodef-options-front-end.qodef-tab-wrapper .qodef-tab-item-nav-wrapper:after {
@@ -2480,18 +2480,16 @@
 
 [class*=qodef-page-v4].qodef-options-admin.qodef-tab-wrapper .qodef-tab-item-content .qodef-tab-description, [class*=qodef-page-v4].qodef-options-meta.qodef-tab-wrapper .qodef-tab-item-content .qodef-tab-description, [class*=qodef-page-v4].qodef-options-front-end.qodef-tab-wrapper .qodef-tab-item-content .qodef-tab-description {
 	font-size: 17px;
-	margin: 40px 0 0;
-	padding-bottom: 10px;
-	border-bottom: 1px solid #e7e7e7;
+	margin: 0 0 30px;
 }
 
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper {
-	padding: 0 0 28px;
+	padding: 0;
 	/* repeater inner styles */
 }
 
-[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper:last-child, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper:last-child, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper:last-child {
-	padding-bottom: 0;
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-wrapper-inner, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-wrapper-inner, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-wrapper-inner {
+	padding: 0 0 28px;
 }
 
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-placeholder, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-placeholder, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-placeholder {
@@ -2644,7 +2642,8 @@
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 20px;
-	padding: 0 0px 0 30px;
+	padding: 0 0 0 30px;
+	background: #f7f8f9;
 }
 
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-inner-fields-holder .qodef-repeater-inner-fields, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-inner-fields-holder .qodef-repeater-inner-fields, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-inner-fields-holder .qodef-repeater-inner-fields {
@@ -3343,6 +3342,36 @@
 
 [class*=qodef-page-v4].qodef-options-meta {
 	padding: 30px 30px 25px;
+}
+
+[class*=qodef-page-v4] .qodef-form-field:has(.qodef-options-heading) td {
+	padding: 0;
+}
+
+[class*=qodef-page-v4] .qodef-form-field:has(.qodef-options-heading) .qodef-options-heading {
+	margin-top: 0;
+}
+
+[class*=qodef-page-v4] .qodef-options-heading {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 20px 0;
+	padding: 15px 0 0;
+	border-top: 1px solid #bbb;
+	width: 95%;
+}
+
+[class*=qodef-page-v4] .qodef-options-heading .qodef-options-heading-icon img {
+	display: block;
+	width: 16px;
+}
+
+[class*=qodef-page-v4] .qodef-options-heading .qodef-options-heading-content .qodef-title {
+	font-family: "DM Sans", sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	margin: 0;
 }
 
 .postbox-container #listing-reviews-criteriadiv,
@@ -4124,7 +4153,6 @@ body.wp-admin.rtl .ui-datepicker {
 	overflow: hidden !important;
 	white-space: nowrap !important;
 	clip: rect(0 0 0 0) !important;
-	-webkit-clip-path: inset(50%) !important;
 	clip-path: inset(50%) !important;
 }
 
@@ -4594,17 +4622,19 @@ body:has(.qodef-admin-page-v4) #wpcontent {
 
 .qodef-admin-page-v4 .qodef-tabs-navigation-wrapper {
 	position: absolute;
-	top: 25px;
+	top: 0;
 	left: 0;
 	width: 211px;
 	transition: opacity 0.3s ease;
 	z-index: 9;
 	margin-top: var(--qodef-admin-header-height);
+	padding-top: 25px;
 	box-sizing: border-box;
 }
 
 .qodef-admin-page-v4 .qodef-tabs-navigation-wrapper .qodef-tabs-navigation-wrapper-inner {
 	height: 100%;
+	box-sizing: border-box;
 }
 
 .qodef-admin-page-v4.qodef-no-header .qodef-tabs-navigation-wrapper {
@@ -4648,10 +4678,21 @@ body:has(.qodef-admin-page-v4) #wpcontent {
 	margin: 0;
 }
 
+.qodef-admin-page-v4 ul.navbar-nav li > a {
+	color: currentColor;
+	text-decoration: none;
+}
+
+.qodef-admin-page-v4 ul.navbar-nav li > a:focus {
+	box-shadow: none;
+}
+
+.qodef-admin-page-v4 ul.navbar-nav li > a,
 .qodef-admin-page-v4 ul.navbar-nav li > span {
 	position: relative;
 }
 
+.qodef-admin-page-v4 ul.navbar-nav li > a:after,
 .qodef-admin-page-v4 ul.navbar-nav li > span:after {
 	content: "";
 	position: absolute;
@@ -4672,7 +4713,9 @@ body:has(.qodef-admin-page-v4) #wpcontent {
 	border-color: #ee2852;
 }
 
-.qodef-admin-page-v4 ul.navbar-nav li:hover > span:after, .qodef-admin-page-v4 ul.navbar-nav li.qodef-active > span:after {
+.qodef-admin-page-v4 ul.navbar-nav li:hover > a:after,
+.qodef-admin-page-v4 ul.navbar-nav li:hover > span:after, .qodef-admin-page-v4 ul.navbar-nav li.qodef-active > a:after,
+.qodef-admin-page-v4 ul.navbar-nav li.qodef-active > span:after {
 	width: 100%;
 }
 
@@ -4871,8 +4914,6 @@ body:has(.qodef-admin-page-v4) #wpcontent {
 		height: 100%;
 		background: #f7f8f9;
 		width: 40%;
-		padding-top: calc(var(--qodef-admin-header-height) + 63px);
-		margin-top: 0;
 		transition: transform .3s ease-in-out;
 		box-shadow: 0 2px 10px rgba(175, 175, 175, 0.16);
 	}
@@ -4909,8 +4950,9 @@ body:has(.qodef-admin-page-v4) #wpcontent {
 		max-width: 100%;
 	}
 	.qodef-admin-page-v4 .qodef-tabs-navigation-wrapper {
+		position: absolute;
+		top: 0;
 		width: 80%;
-		padding-top: 113px;
 	}
 	.qodef-admin-page-v4 .qodef-admin-content {
 		padding-top: 8px;
@@ -4921,29 +4963,847 @@ body:has(.qodef-admin-page-v4) #wpcontent {
 	}
 }
 
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) #screen-meta-links {
+	display: none;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap {
+	background-color: #fff;
+	display: block;
+	width: 930px;
+	padding: 44px 50px 35px;
+	font-family: "DM Sans", sans-serif;
+	box-sizing: border-box;
+	margin: 0 auto;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap * {
+	box-sizing: border-box;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap .tab-content.qodef-hide-pane {
+	display: none;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap .notice {
+	display: none !important;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap .wp-heading-inline {
+	font-size: 16px;
+	line-height: 1.1em;
+	font-weight: 600;
+	font-family: "DM Sans", sans-serif;
+	margin: 0 0 15px;
+	color: #000000;
+	padding: 0;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #titlediv #title {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	vertical-align: top;
+	margin: 0;
+	padding: 2.5px 13px;
+	font-family: "DM Sans", sans-serif;
+	font-size: 16px;
+	line-height: 30px;
+	font-weight: inherit;
+	color: #696969;
+	background-color: #fff;
+	border: 1px solid #bbbbbb;
+	border-radius: 5px;
+	outline: 0;
+	cursor: pointer;
+	transition: color 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out;
+	box-shadow: none;
+	min-height: 39px;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #titlediv #title:focus {
+	color: #000000;
+	background-color: #fff;
+	border-color: #c1c1c5;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #titlediv #title:-ms-input-placeholder {
+	color: #b7b7b7;
+	opacity: 1;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #titlediv #title::placeholder {
+	color: #b7b7b7;
+	opacity: 1;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap .wp-header-end {
+	margin: 0 0 29px;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap .postbox {
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap a.button,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap button.button,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap input.button {
+	position: relative;
+	vertical-align: middle;
+	width: auto;
+	margin: 0;
+	font-family: "DM Sans", sans-serif;
+	font-size: 13px;
+	line-height: 2em;
+	font-weight: 700;
+	text-transform: uppercase;
+	border-radius: 5px;
+	letter-spacing: 0.02em;
+	outline: none;
+	box-sizing: border-box;
+	transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+	cursor: pointer;
+	text-decoration: none;
+	box-shadow: none;
+	display: inline-block;
+	color: #000000;
+	background-color: transparent;
+	border: 1px solid #dedee1;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap a.button:hover,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap button.button:hover,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap input.button:hover {
+	color: #000000;
+	background-color: #fff;
+	border-color: #b7b7b7;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap a.button.button.button-primary,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap button.button.button.button-primary,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap input.button.button.button-primary {
+	color: #fff;
+	background-color: #ee2852;
+	border: 1px solid transparent;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap a.button.button.button-primary:hover,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap button.button.button.button-primary:hover,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap input.button.button.button-primary:hover {
+	color: #fff;
+	background-color: #fd315c;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap a.page-title-action {
+	position: relative;
+	vertical-align: middle;
+	width: auto;
+	margin: 0;
+	font-family: "DM Sans", sans-serif;
+	font-size: 13px;
+	line-height: 2em;
+	font-weight: 700;
+	text-transform: uppercase;
+	border-radius: 5px;
+	letter-spacing: 0.02em;
+	outline: none;
+	box-sizing: border-box;
+	transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+	cursor: pointer;
+	text-decoration: none;
+	box-shadow: none;
+	display: inline-block;
+	color: #fff;
+	background-color: #ee2852;
+	border: 1px solid transparent;
+	margin-left: 20px;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap a.page-title-action:hover {
+	color: #fff;
+	background-color: #fd315c;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap a.button-cancel {
+	position: relative;
+	vertical-align: middle;
+	width: auto;
+	margin: 0;
+	font-family: "DM Sans", sans-serif;
+	font-size: 13px;
+	line-height: 2em;
+	font-weight: 700;
+	text-transform: uppercase;
+	border-radius: 5px;
+	letter-spacing: 0.02em;
+	outline: none;
+	box-sizing: border-box;
+	transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+	cursor: pointer;
+	text-decoration: none;
+	box-shadow: none;
+	display: inline-block;
+	color: #000000;
+	background-color: transparent;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap a.button-cancel:hover {
+	color: #000000;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap input[type="search"],
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap input[type="text"],
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap select {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	margin: 0;
+	padding: 2.5px 13px;
+	font-family: "DM Sans", sans-serif;
+	font-size: 13px;
+	line-height: 30px;
+	font-weight: inherit;
+	color: #696969;
+	background-color: #fff;
+	border: 1px solid #bbbbbb;
+	border-radius: 5px;
+	outline: 0;
+	cursor: pointer;
+	transition: color 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out;
+	box-shadow: none;
+	min-height: 35px;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #post-visibility-select {
+	margin-top: 9px;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #post-visibility-select input[type=radio] {
+	width: 17px;
+	height: 17px;
+	max-height: 17px;
+	border-radius: 17px;
+	box-shadow: none;
+	border-color: #7c7c7c;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #post-visibility-select input[type=radio]:checked::before {
+	border: 5px solid #ee2852;
+	background-color: transparent;
+	margin: -1px;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #post-visibility-select input[type=radio] + label {
+	position: relative;
+	pointer-events: none;
+	cursor: pointer;
+	display: inline-block;
+	line-height: 17px;
+	color: #1d1d1d;
+	font-family: "DM Sans", sans-serif;
+	margin-bottom: 9px;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap .timestamp-wrap {
+	line-height: 35px;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap .subsubsub {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin: 0;
+	font-family: inherit;
+	z-index: 2;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap .subsubsub li {
+	font-size: 0;
+	line-height: 1;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap .subsubsub li a {
+	padding: 4px 14px;
+	margin: 0;
+	font-size: 14px;
+	line-height: 27px;
+	font-weight: 600;
+	text-decoration: none;
+	color: #717171;
+	border: 0;
+	border-bottom: 2px solid rgba(112, 112, 112, 0.1);
+	box-shadow: none;
+	outline: none;
+	cursor: pointer;
+	transition: color 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap .subsubsub li a .count {
+	color: inherit;
+	font-weight: 400;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap .subsubsub li a.current, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap .subsubsub li a:hover {
+	color: #000;
+	border-color: #000;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap .subsubsub:not(:has(.current)) li.all a {
+	color: #000;
+	border-color: #000;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter {
+	position: relative;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .search-box {
+	display: flex;
+	justify-content: flex-end;
+	column-gap: 8px;
+	margin: 0;
+	float: none;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .bulkactions,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .actions {
+	display: flex;
+	column-gap: 8px;
+	padding: 0;
+	margin: 0;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages {
+	display: flex;
+	align-items: center;
+	column-gap: 8px;
+	margin: 0;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages .displaying-num {
+	margin: 0;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages .pagination-links {
+	display: flex;
+	column-gap: 8px;
+	align-items: center;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages .paging-input {
+	margin: 0;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages .paging-input * {
+	font-family: inherit;
+	font-size: 13px;
+	line-height: 2.153846153846154;
+	color: #000;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages .paging-input .current-page {
+	min-width: 55px;
+	min-height: 35px;
+	padding: 0 13px;
+	text-align: left;
+	color: #696969;
+	background-color: #fff;
+	border: 1px solid #d1d1d1;
+	border-radius: 6px;
+	box-shadow: none;
+	outline: none;
+	transition: color 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages .paging-input .current-page:-ms-input-placeholder {
+	color: inherit;
+	opacity: 1;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages .paging-input .current-page::placeholder {
+	color: inherit;
+	opacity: 1;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages .paging-input .current-page:focus, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages .paging-input .current-page:hover {
+	color: #000;
+	border-color: #000;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages .tablenav-pages-navspan {
+	display: block;
+	min-width: 35px;
+	min-height: 35px;
+	margin: 0;
+	padding: 0 4px;
+	font-family: inherit;
+	font-size: 20px;
+	line-height: 33px;
+	color: #696969;
+	background-color: #fff;
+	border: 1px solid #d1d1d1;
+	border-radius: 6px;
+	box-shadow: none;
+	outline: none;
+	transition: color 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages .tablenav-pages-navspan:-ms-input-placeholder {
+	color: inherit;
+	opacity: 1;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages .tablenav-pages-navspan::placeholder {
+	color: inherit;
+	opacity: 1;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages .tablenav-pages-navspan:focus, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages .tablenav-pages-navspan:hover {
+	color: #000;
+	border-color: #000;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages.one-page {
+	flex-grow: 1;
+	justify-content: flex-end;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav .tablenav-pages.one-page .pagination-links {
+	display: none;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav.top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+	height: auto;
+	min-height: 35px;
+	margin: 29px 0 9px;
+	padding: 0;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav.top > * {
+	float: none;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav.top .clear {
+	display: none !important;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav.bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+	height: auto;
+	margin: 9px 0 0;
+	padding: 0;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav.bottom > * {
+	float: none;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .tablenav.bottom .clear {
+	display: none !important;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th.check-column,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th.check-column, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead td.check-column,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot td.check-column, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody th.check-column {
+	padding: 9px 0 8px 11px;
+	vertical-align: middle;
+	border: 0;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th.check-column input, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th.check-column input, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead td.check-column input, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot td.check-column input, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody th.check-column input {
+	display: block;
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	padding: 0 !important;
+	background-color: #fff;
+	border-color: #b9b9b9;
+	border-radius: 2px;
+	box-shadow: none;
+	outline: none;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th.check-column input:before, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th.check-column input:before, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead td.check-column input:before, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot td.check-column input:before, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody th.check-column input:before {
+	content: '';
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	background-color: transparent;
+	-webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMy4wMTciIGhlaWdodD0iMTAuNDYxIiB2aWV3Qm94PSIwIDAgMTMuMDE3IDEwLjQ2MSI+DQogIDxwYXRoIGQ9Ik0xLDUuNTg5LDQuNjMzLDguNjQ4LDExLjIsMSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC40MDkgMC40MSkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iMiIvPg0KPC9zdmc+DQo=");
+	mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMy4wMTciIGhlaWdodD0iMTAuNDYxIiB2aWV3Qm94PSIwIDAgMTMuMDE3IDEwLjQ2MSI+DQogIDxwYXRoIGQ9Ik0xLDUuNTg5LDQuNjMzLDguNjQ4LDExLjIsMSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC40MDkgMC40MSkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iMiIvPg0KPC9zdmc+DQo=");
+	-webkit-mask-position: center;
+	mask-position: center;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th.check-column input:checked, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th.check-column input:checked, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead td.check-column input:checked, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot td.check-column input:checked, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody th.check-column input:checked {
+	background-color: #ee2852;
+	border-color: #ee2852;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th.check-column input:checked:before, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th.check-column input:checked:before, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead td.check-column input:checked:before, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot td.check-column input:checked:before, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody th.check-column input:checked:before {
+	background-color: #fff;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th.check-column label, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th.check-column label, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead td.check-column label, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot td.check-column label, body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody th.check-column label {
+	background: none;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table {
+	background-color: #fff;
+	border: 1px solid #eee;
+	border-radius: 5px;
+	box-shadow: none;
+	outline: none;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th {
+	padding: 9px 11px 8px;
+	font-family: inherit;
+	font-size: 14px;
+	line-height: 1.357142857142857em;
+	font-weight: 600;
+	color: #000;
+	border: 0;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th a,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th a {
+	padding: 0;
+	display: inline-flex;
+	align-items: center;
+	column-gap: 15px;
+	color: inherit;
+	outline: none;
+	box-shadow: none;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th .sorting-indicators,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th .sorting-indicators {
+	row-gap: 4px;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th .sorting-indicator,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th .sorting-indicator {
+	width: 9px;
+	height: 5px;
+	margin: 0;
+	background-color: #b7b7b7;
+	transition: background-color 0.2s ease-out;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th .sorting-indicator:hover,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th .sorting-indicator:hover {
+	background-color: #7a7a7a;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th .sorting-indicator:before,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th .sorting-indicator:before {
+	display: none !important;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th .sorting-indicator.asc,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th .sorting-indicator.asc {
+	-webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjUiIHZpZXdCb3g9IjAgMCA5IDUiPg0KICA8cGF0aCBkPSJNNC41LDAsOSw1SDBaIiBmaWxsPSIjYjdiN2I3Ii8+DQo8L3N2Zz4=");
+	mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjUiIHZpZXdCb3g9IjAgMCA5IDUiPg0KICA8cGF0aCBkPSJNNC41LDAsOSw1SDBaIiBmaWxsPSIjYjdiN2I3Ii8+DQo8L3N2Zz4=");
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th .sorting-indicator.desc,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th .sorting-indicator.desc {
+	-webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjUiIHZpZXdCb3g9IjAgMCA5IDUiPg0KICA8cGF0aCBkPSJNNC41LDAsOSw1SDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5IDUpIHJvdGF0ZSgxODApIiBmaWxsPSIjYjdiN2I3Ii8+DQo8L3N2Zz4NCg==");
+	mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjUiIHZpZXdCb3g9IjAgMCA5IDUiPg0KICA8cGF0aCBkPSJNNC41LDAsOSw1SDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5IDUpIHJvdGF0ZSgxODApIiBmaWxsPSIjYjdiN2I3Ii8+DQo8L3N2Zz4NCg==");
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th.sorted.asc .sorting-indicator.asc,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th.sorted.asc .sorting-indicator.asc {
+	background-color: #7a7a7a;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th.sorted.desc .sorting-indicator.desc,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th.sorted.desc .sorting-indicator.desc {
+	background-color: #7a7a7a;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table thead th.column-actions,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot th.column-actions {
+	padding: 0;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot tr th {
+	border-top: 1px solid #eee;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tfoot td.check-column {
+	border-top: 1px solid #eee;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody tr {
+	background: none;
+	transition: background-color 0.2s ease-out;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody tr:hover {
+	background-color: #fcfcfc;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody th.check-column {
+	border-top: 1px solid #eee;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody td {
+	padding: 9px 11px 8px;
+	vertical-align: middle;
+	font-family: inherit;
+	font-size: 13px;
+	line-height: 1.461538461538462em;
+	font-weight: 400;
+	color: #000;
+	border-top: 1px solid #eee;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody td .row-actions {
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+	width: 100%;
+	line-height: 1;
+	left: 0;
+	padding: 0;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody td .row-actions:has(.qodef-table-action-btn) > span {
+	font-size: 0;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody td .row-actions:has(.qodef-table-action-btn) > span a,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody td .row-actions:has(.qodef-table-action-btn) > span button {
+	color: #a5a5a5;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody td .row-actions:has(.qodef-table-action-btn) > span a .qodef-table-action-btn,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody td .row-actions:has(.qodef-table-action-btn) > span button .qodef-table-action-btn {
+	display: block;
+	width: 100%;
+	height: auto;
+	fill: currentColor;
+	max-width: 18px;
+	transition: color 0.2s ease-out;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody td .row-actions:has(.qodef-table-action-btn) > span a:hover,
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody td .row-actions:has(.qodef-table-action-btn) > span button:hover {
+	color: #000;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody td.column-title strong {
+	font-family: inherit;
+	font-size: 13px;
+	line-height: 1.461538461538462em;
+	font-weight: 400;
+	color: #000;
+	margin: 0 0 6px;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody td.column-title strong a {
+	position: relative;
+	color: inherit;
+	outline: none;
+	box-shadow: none;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody td.column-title strong a:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 1px;
+	background-color: currentColor;
+	opacity: 0;
+	transition: opacity 0.2s ease-out;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody td.column-title strong a:hover:after {
+	opacity: 1;
+}
+
+body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .wp-list-table tbody .inline-edit-wrapper .button.cancel {
+	margin-left: 10px;
+}
+
+.qodef-admin-page-v4.qodef-cpt-page {
+	margin-top: 0;
+	padding-bottom: 25px;
+}
+
+.qodef-admin-page-v4.qodef-cpt-page .qodef-admin-header {
+	width: 100%;
+}
+
+@media only screen and (max-width: 1600px) {
+	body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap {
+		width: 800px;
+	}
+}
+
+@media only screen and (max-width: 1366px) {
+	body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap {
+		width: 725px;
+	}
+}
+
+@media only screen and (max-width: 1180px) {
+	body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap {
+		margin: 0 25px 0 auto;
+		padding: 15px 20px;
+	}
+	body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap .subsubsub {
+		margin-bottom: 20px;
+	}
+	body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap #posts-filter .search-box {
+		width: 100%;
+		justify-content: flex-start;
+	}
+}
+
+@media only screen and (max-width: 1024px) {
+	body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap {
+		width: 620px;
+	}
+}
+
+@media only screen and (max-width: 880px) {
+	body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap {
+		width: 530px;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap {
+		width: calc( 100% - 50px);
+		margin: 0 auto;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	body:has(.qodef-admin-page-v4):has(.qodef-cpt-page) .wrap {
+		width: calc( 100% - 16px);
+	}
+}
+
 .form-table th,
 .form-table td {
 	box-sizing: border-box;
 }
 
-.qodef-page-v4.qodef-options-taxonomy .qodef-field-select label {
+[class*=qodef-page-v4].qodef-options-taxonomy .qodef-field-select label {
 	display: block;
 }
 
-.qodef-page-v4.qodef-options-taxonomy .qodef-field-select select {
+[class*=qodef-page-v4].qodef-options-taxonomy .qodef-field-select select {
 	max-width: 100%;
 }
 
-.qodef-page-v4.qodef-options-taxonomy .qodef-field-color .qodef-input-holder {
+[class*=qodef-page-v4].qodef-options-taxonomy .qodef-field-color .qodef-input-holder {
 	position: relative;
 }
 
-.qodef-page-v4.qodef-options-taxonomy .qodef-field-color td {
+[class*=qodef-page-v4].qodef-options-taxonomy .qodef-field-color td {
 	position: relative;
 }
 
-.qodef-page-v4.qodef-options-taxonomy .qodef-field-color td .wp-picker-holder {
+[class*=qodef-page-v4].qodef-options-taxonomy .qodef-field-color td .wp-picker-holder {
 	top: 40px;
+}
+
+[class*=qodef-page-v4].qodef-options-taxonomy .qodef-field-image .qodef-image-thumb img {
+	max-width: 120px;
+	border: 1px solid #bbb;
+}
+
+[class*=qodef-page-v4].qodef-options-taxonomy .qodef-field-image .qodef-image-upload-btn {
+	color: #000;
+	margin-right: 10px;
+}
+
+[class*=qodef-page-v4].qodef-options-taxonomy .qodef-field-image .qodef-image-remove-btn {
+	color: #000;
+}
+
+[class*=qodef-page-v4].qodef-options-taxonomy p.submit {
+	margin-top: 20px;
+}
+
+[class*=qodef-page-v4].qodef-options-product-attribute.form-table {
+	table-layout: auto;
+}
+
+@media (min-width: 783px) {
+	.woocommerce [class*=qodef-page-v4].qodef-options-product-attribute.form-table input.regular-input, .woocommerce
+	[class*=qodef-page-v4].qodef-options-product-attribute.form-table input[type=email], .woocommerce
+	[class*=qodef-page-v4].qodef-options-product-attribute.form-table input[type=number], .woocommerce
+	[class*=qodef-page-v4].qodef-options-product-attribute.form-table input[type=text], .woocommerce
+	[class*=qodef-page-v4].qodef-options-product-attribute.form-table select, .woocommerce
+	[class*=qodef-page-v4].qodef-options-product-attribute.form-table textarea {
+		width: 400px;
+	}
+}
+
+[class*=qodef-page-v4].qodef-options-product-attribute .qodef-form-field td {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+[class*=qodef-page-v4].qodef-options-product-attribute .qodef-field-image .qodef-image-thumb img {
+	max-width: 120px;
+	border: 1px solid #bbb;
+}
+
+[class*=qodef-page-v4].qodef-options-product-attribute .qodef-field-image .qodef-image-upload-btn {
+	color: #000;
+	margin-right: 10px;
+}
+
+[class*=qodef-page-v4].qodef-options-product-attribute .qodef-field-image .qodef-image-remove-btn {
+	color: #000;
+}
+
+[class*=qodef-page-v4].qodef-options-product-attribute p.submit {
+	margin-top: 20px;
+}
+
+.qodef-variation-value.qodef-variation-value--color {
+	width: 30px;
+	height: 30px;
+}
+
+.qodef-variation-value.qodef-variation-value--image {
+	width: 40px;
+	height: 40px;
+	object-fit: cover;
+}
+
+.qodef-variation-value.qodef-variation-value--label {
+	padding: 0 5px;
+	min-width: 30px;
+	height: 30px;
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #333;
 }
 
 .form-table th,

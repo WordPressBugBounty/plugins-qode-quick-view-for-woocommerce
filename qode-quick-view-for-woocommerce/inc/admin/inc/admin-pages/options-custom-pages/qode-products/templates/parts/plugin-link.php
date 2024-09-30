@@ -7,13 +7,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 <a
 	class="qodef-btn qodef-with-icon qodef-btn-underlined qodef-action-button <?php echo esc_attr( $class ); ?>"
 	data-plugin="<?php echo esc_attr( $plugin_key ); ?>"
-	data-action="<?php echo esc_attr( $action ); ?>"
-	data-version="<?php echo esc_attr( $version ); ?>"
-	data-nonce="<?php echo esc_attr( wp_create_nonce( 'qode-quick-view-for-woocommerce-install-' . esc_attr( $plugin_key ) ) ); ?>"
-	data-installing-label="<?php esc_attr_e( 'Installing', 'qode-quick-view-for-woocommerce' ); ?>"
-	data-activating-label="<?php esc_attr_e( 'Activation', 'qode-quick-view-for-woocommerce' ); ?>"
 	href="<?php echo esc_url( $plugin_url ); ?>"
-	target="_blank">
+	target="<?php echo esc_attr( $plugin_url_target ); ?>">
 	<span class="qodef-btn-text"><?php echo esc_html( $label ); ?></span>
 	<span class="qodef-btn-icon">
 		<svg xmlns="http://www.w3.org/2000/svg" width="15.675" height="15.675" viewBox="0 0 15.675 15.675">

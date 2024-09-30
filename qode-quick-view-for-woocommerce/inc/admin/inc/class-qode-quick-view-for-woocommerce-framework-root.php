@@ -10,6 +10,8 @@ class Qode_Quick_View_For_WooCommerce_Framework_Root {
 	private $meta_options;
 	private $attachment_options;
 	private $taxonomy_options;
+	private $product_attribute_options;
+	private $custom_post_types;
 	private $shortcodes;
 	private $widgets;
 
@@ -18,6 +20,7 @@ class Qode_Quick_View_For_WooCommerce_Framework_Root {
 
 		add_action( 'after_setup_theme', array( $this, 'load_admin_pages' ), 5 );
 		add_action( 'after_setup_theme', array( $this, 'load_options_files' ), 5 );
+		add_action( 'after_setup_theme', array( $this, 'load_cpt_files' ), 5 );
 		add_action( 'after_setup_theme', array( $this, 'load_admin_notice_files' ), 5 );
 		add_action( 'after_setup_theme', array( $this, 'load_shortcode_files' ), 5 );
 		add_action( 'after_setup_theme', array( $this, 'load_widget_files' ), 5 );
@@ -55,9 +58,17 @@ class Qode_Quick_View_For_WooCommerce_Framework_Root {
 			}
 		}
 
-		$this->meta_options       = new Qode_Quick_View_For_WooCommerce_Framework_Options_Meta();
-		$this->attachment_options = new Qode_Quick_View_For_WooCommerce_Framework_Options_Attachment();
-		$this->taxonomy_options   = new Qode_Quick_View_For_WooCommerce_Framework_Options_Taxonomy();
+		$this->meta_options              = new Qode_Quick_View_For_WooCommerce_Framework_Options_Meta();
+		$this->attachment_options        = new Qode_Quick_View_For_WooCommerce_Framework_Options_Attachment();
+		$this->taxonomy_options          = new Qode_Quick_View_For_WooCommerce_Framework_Options_Taxonomy();
+		$this->product_attribute_options = new Qode_Quick_View_For_WooCommerce_Framework_Options_Attribute();
+	}
+
+	public function load_cpt_files() {
+		require_once QODE_QUICK_VIEW_FOR_WOOCOMMERCE_ADMIN_PATH . '/inc/post-types/include.php';
+
+		$this->custom_post_types = new Qode_Quick_View_For_WooCommerce_Framework_Custom_Post_Types();
+		$this->taxonomy_options  = new Qode_Quick_View_For_WooCommerce_Framework_Options_Taxonomy();
 	}
 
 	public function load_admin_notice_files() {
@@ -107,6 +118,50 @@ class Qode_Quick_View_For_WooCommerce_Framework_Root {
 		return $this->taxonomy_options;
 	}
 
+	public function get_product_attribute_options() {
+		return $this->product_attribute_options;
+	}
+
+	public function get_custom_post_types() {
+		return $this->custom_post_types;
+	}
+
+	public function get_custom_post_type_names() {
+		$cpt_names = array();
+
+		foreach ( (array) $this->custom_post_types as $items ) {
+			foreach ( $items as $item => $value ) {
+				$cpt_names[ $item ] = $item;
+			}
+		}
+
+		return $cpt_names;
+	}
+
+	public function get_custom_post_type_taxonomies( $cpt_slug = '' ) {
+		$taxonomies = array();
+
+		if ( ! empty( $cpt_slug ) ) {
+			$cpt_taxonomies = get_object_taxonomies( $cpt_slug );
+
+			foreach ( $cpt_taxonomies as $cpt_taxonomy ) {
+				$taxonomies[ $cpt_taxonomy ] = ucwords( str_replace( array( '-' ), array( ' ' ), $cpt_taxonomy ) );
+			}
+		} else {
+			$cpt_names = qode_quick_view_for_woocommerce_framework_get_framework_root()->get_custom_post_type_names();
+
+			foreach ( $cpt_names as $cpt_name ) {
+				$cpt_taxonomies = get_object_taxonomies( $cpt_name );
+
+				foreach ( $cpt_taxonomies as $cpt_taxonomy ) {
+					$taxonomies[ $cpt_taxonomy ] = ucwords( str_replace( array( '-' ), array( ' ' ), $cpt_taxonomy ) );
+				}
+			}
+		}
+
+		return $taxonomies;
+	}
+
 	public function add_options_page( $params ) {
 		$page = false;
 		if ( isset( $params['type'] ) && ! empty( $params['type'] ) ) {
@@ -125,10 +180,21 @@ class Qode_Quick_View_For_WooCommerce_Framework_Root {
 			} elseif ( 'taxonomy' === $params['type'] ) {
 				$page = new Qode_Quick_View_For_WooCommerce_Framework_Page_Taxonomy( $params );
 				$this->get_taxonomy_options()->add_option_page( $page );
+			} elseif ( 'product-attribute' === $params['type'] ) {
+				$page = new Qode_Quick_View_For_WooCommerce_Framework_Page_Attribute( $params );
+				$this->get_product_attribute_options()->add_option_page( $page );
 			}
 		}
 
 		return $page;
+	}
+
+	public function add_custom_post_type( Qode_Quick_View_For_WooCommerce_Framework_Custom_Post_Type $cpt ) {
+		if ( $cpt ) {
+			$this->get_custom_post_types()->add_custom_post_type( $cpt );
+		}
+
+		return $cpt;
 	}
 
 	public function get_shortcodes() {

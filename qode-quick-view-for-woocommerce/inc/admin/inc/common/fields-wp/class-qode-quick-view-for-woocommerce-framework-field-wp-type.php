@@ -32,14 +32,14 @@ abstract class Qode_Quick_View_For_WooCommerce_Framework_Field_WP_Type {
 		$params['value'] = $value;
 
 		// phpcs:ignore WordPress.Security.NonceVerification
-		$layout           = ( 'taxonomy' === $this->type && ! isset( $_GET['tag_ID'] ) ) ? 'div' : 'table';
+		$layout           = ( 'taxonomy' === $this->type && ! isset( $_GET['tag_ID'] ) ) || ( 'product-attribute' === $this->type && ! isset( $_GET['edit'] ) ) ? 'div' : 'table';
 		$params['layout'] = $layout;
 
 		$id           = $this->name;
 		$params['id'] = $id;
 
 		$class   = array();
-		$class[] = 'taxonomy' === $this->type ? 'form-field' : 'user-field';
+		$class[] = 'taxonomy' === $this->type || 'product-attribute' === $this->type ? 'form-field' : 'user-field';
 		$class[] = 'qodef-field-' . $this->field_type;
 
 		$dependency_data = array();

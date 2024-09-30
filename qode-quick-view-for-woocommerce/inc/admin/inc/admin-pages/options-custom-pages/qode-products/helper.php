@@ -67,116 +67,77 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_get_plugin_by_slug_from
 	}
 }
 
-if ( ! function_exists( 'qode_quick_view_for_woocommerce_plugin_installation' ) ) {
-	function qode_quick_view_for_woocommerce_plugin_installation() {
-
-		if ( isset( $_POST ) && isset( $_POST['plugin'] ) ) {
-			$plugin_key = sanitize_text_field( wp_unslash( $_POST['plugin'] ) );
-			check_ajax_referer( 'qode-quick-view-for-woocommerce-install-' . $plugin_key, 'nonce' );
-
-			$plugin = qode_quick_view_for_woocommerce_get_plugin_by_slug_from_others_plugins( $plugin_key );
-
-			if ( ! function_exists( 'get_plugins' ) ) {
-				require_once ABSPATH . 'wp-admin/includes/plugin.php';
-			}
-
-			$plugin_action = isset( $_POST['pluginAction'] ) ? sanitize_text_field( wp_unslash( $_POST['pluginAction'] ) ) : '';
-			$plugin_slug   = isset( $_POST['version'] ) && 'free' === sanitize_text_field( wp_unslash( $_POST['version'] ) ) ? $plugin['slug'] : $plugin['premium_slug'];
-			$download_url  = $plugin['download_url'];
-
-			if ( 'install' === $plugin_action ) {
-
-				ob_start();
-				include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-				wp_cache_flush();
-
-				$skin     = new WP_Ajax_Upgrader_Skin();
-				$upgrader = new Plugin_Upgrader( $skin );
-
-				$install_result = $upgrader->install( $download_url );
-
-				if ( ! is_wp_error( $install_result ) && $install_result ) {
-					$activate = activate_plugin( $plugin_slug, '', false, true );
-
-					if ( null === $activate ) {
-						$button = qode_quick_view_for_woocommerce_plugin_get_plugin_link( $plugin_key, $plugin );
-						qode_quick_view_for_woocommerce_get_ajax_status( 'success', esc_html__( 'Installed and activated', 'qode-quick-view-for-woocommerce' ), array( 'button' => $button ) );
-					}
-				}
-			} else {
-				$activate = activate_plugin( $plugin_slug, '', false, true );
-
-				if ( null === $activate ) {
-
-					$button = qode_quick_view_for_woocommerce_plugin_get_plugin_link( $plugin_key, $plugin );
-					qode_quick_view_for_woocommerce_get_ajax_status( 'success', esc_html__( 'Activated', 'qode-quick-view-for-woocommerce' ), array( 'button' => $button ) );
-				}
-			}
-
-			wp_die();
-		}
-	}
-	add_action( 'wp_ajax_qode_quick_view_for_woocommerce_plugin_installation', 'qode_quick_view_for_woocommerce_plugin_installation' );
-}
-
 if ( ! function_exists( 'qode_quick_view_for_woocommerce_plugin_get_plugin_link' ) ) {
 
 	function qode_quick_view_for_woocommerce_plugin_get_plugin_link( $plugin_key, $plugin ) {
 
-		$params = array(
-			'plugin_key' => $plugin_key,
-		);
 		$status = qode_quick_view_for_woocommerce_plugin_status( $plugin );
 
 		switch ( $status ) :
 			case 'installed':
+			case 'installed_pro':
+				$plugin_url = add_query_arg(
+					array(
+						'plugin_status' => 'inactive',
+						's'             => esc_attr( $plugin_key ),
+					),
+					admin_url( 'plugins.php' )
+				);
+
 				$params = array(
-					'class'   => 'qodef-install-plugin',
-					'action'  => 'activate',
-					'version' => 'free',
-					'label'   => esc_html__( 'Activate', 'qode-quick-view-for-woocommerce' ),
+					'class'      => 'qodef-install-plugin',
+					'label'      => esc_html__( 'Activate', 'qode-quick-view-for-woocommerce' ),
+					'plugin_url' => $plugin_url,
 				);
 				break;
 			case 'activated':
 				$params = array(
-					'class'   => 'qodef-buy-plugin',
-					'action'  => 'upgrade',
-					'version' => 'free',
-					'label'   => esc_html__( 'Upgrade', 'qode-quick-view-for-woocommerce' ),
-				);
-				break;
-			case 'installed_pro':
-				$params = array(
-					'class'   => 'qodef-install-plugin',
-					'action'  => 'activate',
-					'version' => 'pro',
-					'label'   => esc_html__( 'Activate', 'qode-quick-view-for-woocommerce' ),
+					'class'             => 'qodef-buy-plugin',
+					'label'             => esc_html__( 'Upgrade', 'qode-quick-view-for-woocommerce' ),
+					'plugin_url'        => isset( $plugin['upgrade_url'] ) ? $plugin['upgrade_url'] : '',
+					'plugin_url_target' => '_blank',
 				);
 				break;
 			case 'activated_pro':
+				$plugin_url = add_query_arg(
+					array(
+						'plugin_status' => 'inactive',
+						's'             => esc_attr( $plugin_key ),
+					),
+					admin_url( 'plugin-install.php' )
+				);
+
 				$params = array(
-					'class'   => 'qodef-installed-plugin',
-					'action'  => 'nothing',
-					'version' => 'pro',
-					'label'   => esc_html__( 'Activated', 'qode-quick-view-for-woocommerce' ),
+					'class'      => 'qodef-installed-plugin',
+					'label'      => esc_html__( 'Activated', 'qode-quick-view-for-woocommerce' ),
+					'plugin_url' => $plugin_url,
 				);
 				break;
 			default:
+				$plugin_url = add_query_arg(
+					array(
+						's'    => $plugin_key,
+						'tab'  => 'search',
+						'type' => 'term',
+					),
+					admin_url( 'plugin-install.php' )
+				);
+
 				$params = array(
-					'class'   => 'qodef-install-plugin',
-					'action'  => 'install',
-					'version' => 'free',
-					'label'   => esc_html__( 'Get Free Version', 'qode-quick-view-for-woocommerce' ),
+					'class'      => 'qodef-install-plugin',
+					'label'      => esc_html__( 'Get Free Version', 'qode-quick-view-for-woocommerce' ),
+					'plugin_url' => $plugin_url,
 				);
 				break;
 		endswitch;
 
-		$params['plugin_key'] = $plugin_key;
-		$params['plugin_url'] = isset( $plugin['upgrade_url'] ) ? $plugin['upgrade_url'] : '';
+		$params['plugin_key']        = $plugin_key;
+		$params['plugin_url_target'] = isset( $params['plugin_url_target'] ) ? $params['plugin_url_target'] : '_self';
 
 		return qode_quick_view_for_woocommerce_framework_get_template_part( QODE_QUICK_VIEW_FOR_WOOCOMMERCE_ADMIN_PATH . '/inc', 'admin-pages/options-custom-pages/qode-products', 'templates/parts/plugin-link', '', $params );
 	}
 }
+
 if ( ! function_exists( 'qode_quick_view_for_woocommerce_is_specific_plugin_installed' ) ) {
 	function qode_quick_view_for_woocommerce_is_specific_plugin_installed( $plugin ) {
 		$plugins = get_plugins();

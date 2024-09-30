@@ -12,7 +12,8 @@
 	$( document ).ready(
 		function () {
 			var $mainHolder      = $( '.qodef-page-v4-quick-view' ),
-				$adminPageHolder = $( '.qodef-admin-page-v4' );
+				$adminPageHolder = $( '.qodef-admin-page-v4' ),
+				$cptPageHolder   = $( '.qodef-cpt-page' );
 
 			if ( $mainHolder.length ) {
 				qodefTabs.init( $mainHolder );
@@ -37,6 +38,9 @@
 
 				qodefReinitRepeaterFields.init();
 				qodefWidgetFields.initColorPicker();
+			} else if ( $cptPageHolder.length ) {
+				// If there is no main holder, but there is a cpt holder, admin needs to reinit for header and navigation.
+				qodefAdminOptionsPanel.adminReInit();
 			}
 		}
 	);
@@ -79,6 +83,31 @@
 		}
 	);
 
+	$( document ).on(
+		'ajaxSuccess',
+		function ( event, xhr, options ) {
+
+			if ( options && options.data && -1 === options.data.indexOf( 'action=add-tag' ) ) {
+				return;
+			}
+
+			var $colorFields = $( '.qodef-field-color' );
+			if ( $colorFields.length ) {
+				$colorFields.each(
+					function () {
+						var clearButton = $( this ).find( '.wp-picker-clear' );
+
+						if ( clearButton.length ) {
+							clearButton.trigger(
+								'click'
+							);
+						}
+					}
+				);
+			}
+		}
+	);
+
 	var qodefTabs = {
 		init: function ( $mainHolder ) {
 			this.holder = $mainHolder.filter( '.qodef-tab-wrapper' );
@@ -87,7 +116,9 @@
 				this.holder.each(
 					function () {
 						qodefTabs.initTabs( $mainHolder, $( this ) );
-						qodefFramework.qodefPerfectScrollbar.init( $( this ).find( '.qodef-tab-item-nav-wrapper' ), false );
+						var $tabsWrapper = $( this ).find( '.qodef-tab-item-nav-wrapper' );
+						qodefFramework.qodefPerfectScrollbar.init( $tabsWrapper, false );
+						qodefTabs.initTabsDrag( $tabsWrapper );
 					}
 				);
 			}
@@ -122,6 +153,54 @@
 					}
 				}
 			);
+		},
+		initTabsDrag: function ( $tabsWrapper ) {
+			var isDown = false;
+			var startX;
+			var scrollLeft;
+
+			$tabsWrapper.on(
+				'mousedown',
+				(e) => {
+					e.preventDefault();
+					isDown     = true;
+					$tabsWrapper.addClass( 'qodef-drag' );
+					startX     = e.pageX - $tabsWrapper[0].offsetLeft;
+					scrollLeft = $tabsWrapper[0].scrollLeft;
+				}
+			);
+			$tabsWrapper.on(
+				'mousewheel',
+				(event, delta) => {
+					$tabsWrapper[0].scrollLeft -= (delta * 20);
+					$tabsWrapper[0].scrollRight -= (delta * 20);
+					event.preventDefault();
+				}
+			);
+			$tabsWrapper.on(
+				'mouseleave',
+				() => {
+					isDown = false;
+					$tabsWrapper.removeClass( 'qodef-drag' );
+				}
+			);
+			$tabsWrapper.on(
+				'mouseup',
+				() => {
+					isDown = false;
+					$tabsWrapper.removeClass( 'qodef-drag' );
+				}
+			);
+			$tabsWrapper.on(
+				'mousemove',
+				( e ) => {
+					if ( ! isDown ) return;
+					e.preventDefault();
+					var x                = e.pageX - $tabsWrapper[0].offsetLeft;
+					var walk             = (x - startX) ;
+					$tabsWrapper[0].scrollLeft = scrollLeft - walk;
+				}
+			);
 		}
 	};
 
@@ -130,6 +209,7 @@
 			qodefDependency.initOptions( $mainHolder );
 			qodefDependency.initMenu();
 			qodefDependency.initWidget();
+			qodefDependency.initProductAttributeTypeSelectBox();
 		},
 		initOptions: function ( $mainHolder ) {
 			var $dependencyOptions = $mainHolder.find( '.qodef-field-content .qodef-field[data-option-name]' );
@@ -285,6 +365,10 @@
 		qodefDependencyActionInit: function ( option, optionValue ) {
 			var dependencyHolder = $( '.qodef-dependency-holder' ),
 				optionName       = option.data( 'option-name' );
+
+			if ( option.prop( 'id' ) === 'attribute_type' ) {
+				optionName = option.attr( 'name' );
+			}
 
 			if ( dependencyHolder.length && optionName !== undefined && optionName !== '' && optionValue !== undefined ) {
 				dependencyHolder.each(
@@ -513,7 +597,14 @@
 					}
 				}
 			);
-		}
+		},
+		initProductAttributeTypeSelectBox: function () {
+			var thisOption = $( '#attribute_type' );
+
+			if ( thisOption.length ) {
+				qodefDependency.qodefSelectBoxDependency( thisOption );
+			}
+		},
 	};
 
 	qodefFramework.qodefDependency = qodefDependency;
@@ -604,8 +695,9 @@
 					qodefRepeater.qodefInitSortable( holder );
 					qodefDependency.reinitRepeater( $mainHolder );
 
+					// need to be plugin unique.
 					$( document ).trigger(
-						'qode_woocommerce_plugin_add_new_row_trigger',
+						'qode_quick_view_for_woocommerce_add_new_row_trigger',
 						$row.find( '.qodef-repeater-fields' )
 					);
 				}
@@ -714,10 +806,13 @@
 
 	var qodefReinitRepeaterFields = {
 		init: function () {
+			// need to be plugin unique.
 			$( document ).on(
-				'qode_woocommerce_plugin_add_new_row_trigger',
+				'qode_quick_view_for_woocommerce__add_new_row_trigger',
 				function ( event, $row ) {
-					qodefSearchOptions.fieldHolder.push( $row );
+					if ( typeof qodefSearchOptions.fieldHolder !== 'undefined' ) {
+						qodefSearchOptions.fieldHolder.push( $row );
+					}
 					qodefInitMediaUploader.reinit( $row );
 					qodefColorPicker.reinit( $row );
 					qodefDatePicker.reinit( $row );
@@ -801,12 +896,35 @@
 				}
 			);
 		},
+		adminReInit: function () {
+			this.adminPage = $( '.qodef-admin-page-v4' );
+			this.adminHeaderPosition();
+
+			if ( qodefFramework.windowWidth <= 800 ) {
+				this.mobile( this.adminPage );
+			}
+
+			var navigationItems = this.adminPage.find( '.qodef-tabs-navigation-wrapper .navbar ul li' );
+
+			navigationItems.on(
+				'click',
+				function () {
+					qodefAdminOptionsPanel.initTabNavItemClick( $( this ) );
+					qodefAdminOptionsPanel.initNavItemClick( $( this ), true );
+				}
+			);
+		},
+		// Change behavior on navigation item click.
 		initTabNavItemClick: function ( item ) {
 			var panelName = item.find( '.nav-link' ).data( 'section' );
 			var urlParams = new URLSearchParams( window.location.search );
 			var template  = urlParams.get( 'template' );
+			var postType  = urlParams.get( 'post_type' );
+			var post      = urlParams.get( 'post' );
 
-			if ( template !== null ) {
+			// If we are on a page that has template, post_type or post parameters in url.
+			// ergo it is not default options page than make a reload.
+			if ( template !== null || postType !== null || post !== null ) {
 				this.setCookie(
 					'qodefQuickViewActiveTab',
 					panelName
@@ -859,12 +977,17 @@
 			}
 		},
 		setActivePanel: function () {
-			var cookie = this.getCookie( 'qodefQuickViewActiveTab' );
+			var cookie 	  = this.getCookie( 'qodefQuickViewActiveTab' );
+			var urlParams = new URLSearchParams( window.location.search );
+			var post      = urlParams.get( 'post' );
+			var postType  = urlParams.get( 'post_type' );
 
-			if ( cookie !== '' && cookie !== 'undefined') {
-				this.initNavItemClick( $( '.qodef-tabs-navigation-wrapper .nav-link[data-section=' + cookie + ']' ).parent() );
-			} else {
-				this.initNavItemClick( $( '.qodef-tabs-navigation-wrapper .navbar ul li:first-child' ) );
+			if ( post === null && postType === null ) {
+				if ( cookie !== '' && cookie !== 'undefined' ) {
+					this.initNavItemClick( $( '.qodef-tabs-navigation-wrapper .nav-link[data-section=' + cookie + ']' ).parent() );
+				} else {
+					this.initNavItemClick( $( '.qodef-tabs-navigation-wrapper .navbar ul li:first-child' ) );
+				}
 			}
 		},
 		saveOptionsInit: function ( $adminPage ) {
@@ -986,10 +1109,17 @@
 								'marginTop',
 								qodefAdminOptionsPanel.adminHeaderHeight
 							);
-							qodefAdminOptionsPanel.adminNavigation.css(
-								'marginTop',
-								0
-							);
+							if ( qodefFramework.windowWidth > 800 ) {
+								qodefAdminOptionsPanel.adminNavigation.css(
+									'marginTop',
+									0
+								);
+							} else if ( qodefFramework.windowWidth <= 800 ) {
+								qodefAdminOptionsPanel.adminNavigation.css(
+									'marginTop',
+									qodefAdminOptionsPanel.adminBarHeight + qodefAdminOptionsPanel.adminHeaderHeight
+								);
+							}
 						} else {
 							qodefAdminOptionsPanel.adminHeader.removeClass( 'qodef-fixed' ).css(
 								'top',
@@ -999,10 +1129,17 @@
 								'marginTop',
 								0
 							);
-							qodefAdminOptionsPanel.adminNavigation.css(
-								'marginTop',
-								qodefAdminOptionsPanel.adminHeaderHeight
-							);
+							if ( qodefFramework.windowWidth > 800 ) {
+								qodefAdminOptionsPanel.adminNavigation.css(
+									'marginTop',
+									qodefAdminOptionsPanel.adminHeaderHeight
+								);
+							} else if ( qodefFramework.windowWidth <= 800 ) {
+								qodefAdminOptionsPanel.adminNavigation.css(
+									'marginTop',
+									qodefAdminOptionsPanel.adminHeader.offset().top + qodefAdminOptionsPanel.adminHeaderHeight - qodefFramework.scroll
+								);
+							}
 						}
 					}
 				);
@@ -1050,6 +1187,8 @@
 				varialbles.$removeButton.show();
 				qodefInitMediaUploader.remove( varialbles.$removeButton );
 			}
+
+			qodefInitMediaUploader.reset( thisHolder );
 
 			varialbles.$imageHolder.on(
 				'click',
@@ -1222,6 +1361,31 @@
 					);
 
 					button.hide().trigger( 'change' );
+				}
+			);
+		},
+		reset: function ( thisHolder ) {
+			$( document ).on(
+				'ajaxSuccess',
+				function ( event, xhr, options ) {
+
+					if ( options && options.data && -1 === options.data.indexOf( 'action=add-tag' ) ) {
+						return;
+					}
+
+					thisHolder.find( '.qodef-image-thumb' ).hide();
+					thisHolder.find( '.qodef-image-thumb' ).find( 'img' ).attr(
+						'src',
+						''
+					);
+					thisHolder.find( '.qodef-image-thumb' ).find( 'li' ).remove();
+
+					// reset meta fields.
+					thisHolder.find( '.qodef-image-meta-fields' ).find( 'input[type="hidden"]' ).each(
+						function () {
+							$( this ).val( '' );
+						}
+					);
 				}
 			);
 		}
@@ -1721,6 +1885,67 @@
 			}
 		}
 	};
+
+	var qodefDragAndDropCheckboxFields = {
+		init: function ( $checkboxFieldHolder, $valuesHolder ) {
+			var $fieldHolder = $checkboxFieldHolder.find( '.qodef-checkbox-group-holder' ),
+				currentOrder = $valuesHolder.find( '.qodef-field' ).val();
+
+			if ( currentOrder && ! currentOrder.trim() ) {
+				qodefDragAndDropCheckboxFields.multipleSelectSaveNewOrder( qodefDragAndDropCheckboxFields.multipleSelectGetNewOrder( $checkboxFieldHolder ), $valuesHolder );
+			} else {
+				qodefDragAndDropCheckboxFields.multipleSelectSetOrder( $fieldHolder, currentOrder );
+				qodefDragAndDropCheckboxFields.multipleSelectSaveNewOrder( qodefDragAndDropCheckboxFields.multipleSelectGetNewOrder( $checkboxFieldHolder ), $valuesHolder );
+			}
+
+			$fieldHolder.sortable(
+				{
+					opacity: 0.6,
+					stop: function () {
+						qodefDragAndDropCheckboxFields.multipleSelectSaveNewOrder( qodefDragAndDropCheckboxFields.multipleSelectGetNewOrder( $checkboxFieldHolder ), $valuesHolder );
+					}
+				}
+			);
+		},
+		multipleSelectSaveNewOrder: function ( newOrder, $valuesHolder ) {
+			$valuesHolder.find( '.qodef-field' ).val( newOrder );
+		},
+		multipleSelectSetOrder: function ( $fieldHolder, newOrder ) {
+			var fieldWrappers = $fieldHolder.find( '.qodef-inline:not(.qodef-hide)' );
+
+			fieldWrappers.sort(
+				function (a, b) {
+					var valueA = $( a ).find( '.qodef-field' ).val();
+					var valueB = $( b ).find( '.qodef-field' ).val();
+					return newOrder.indexOf( valueA ) - newOrder.indexOf( valueB );
+				}
+			);
+
+			$fieldHolder.empty();
+			fieldWrappers.each(
+				function () {
+					$fieldHolder.append( $( this ) );
+				}
+			);
+		},
+		multipleSelectGetNewOrder: function ( $checkboxFieldHolder ) {
+			var $fields        = $checkboxFieldHolder.find( '.qodef-inline:not(.qodef-hide) .qodef-field' ),
+				fieldsNewOrder = '',
+				separator      = '';
+
+			if ( $fields.length ) {
+				$fields.each(
+					function ( index ) {
+						separator       = 0 === index ? '' : ',';
+						fieldsNewOrder += separator + $( this ).val();
+					}
+				);
+			}
+			return fieldsNewOrder;
+		}
+	};
+
+	qodefFramework.qodefDragAndDropCheckboxFields = qodefDragAndDropCheckboxFields;
 
 	var qodefWidgetFields = {
 		initColorPicker: function ( $widget ) {

@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="qodef-section-left">
 		<h2><?php esc_html_e( 'Knowledge Base', 'qode-quick-view-for-woocommerce' ); ?></h2>
 		<p><?php esc_html_e( 'Find the answers to all types of WordPress-related questions by browsing our Knowledge Base articles.', 'qode-quick-view-for-woocommerce' ); ?></p>
-		<a href="https://helpcenter.qodeinteractive.com/?utm_source=dash&utm_medium=quick-view&utm_campaign=help" class="qodef-btn qodef-with-icon qodef-btn-underlined">
+		<a href="https://helpcenter.qodeinteractive.com/?utm_source=dash&utm_medium=qodequickview&utm_campaign=help" class="qodef-btn qodef-with-icon qodef-btn-underlined">
 			<span class="qodef-btn-text"><?php esc_html_e( 'View More', 'qode-quick-view-for-woocommerce' ); ?></span>
 			<span class="qodef-btn-icon">
 				<svg xmlns="http://www.w3.org/2000/svg" width="15.675" height="15.675" viewBox="0 0 15.675 15.675">

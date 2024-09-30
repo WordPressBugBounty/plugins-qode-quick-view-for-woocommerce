@@ -68,8 +68,11 @@ if ( ! class_exists( 'Qode_Quick_View_For_WooCommerce_Admin_General_Page' ) ) {
 		}
 
 		public function plugin_action_links( $links ) {
-			// translators: 1. Premium plugin url.
-			$links['premium'] = sprintf( '<a href="%1$s" target="_blank" class="qode-quick-view-for-woocommerce-premium-link" style="color:#ee2852;font-weight:700">%2$s</a>', 'https://qodeinteractive.com/products/plugins/qode-quick-view-for-woocommerce?utm_source=dash&utm_medium=qodequickview&utm_campaign=gopremium', esc_html__( 'Upgrade', 'qode-quick-view-for-woocommerce' ) );
+
+			if ( ! qode_quick_view_for_woocommerce_is_installed( 'quick-view-premium' ) ) {
+				// translators: 1. Premium plugin url.
+				$links['premium'] = sprintf( '<a href="%1$s" target="_blank" class="qode-quick-view-for-woocommerce-premium-link" style="color:#ee2852;font-weight:700">%2$s</a>', 'https://qodeinteractive.com/products/plugins/qode-quick-view-for-woocommerce?utm_source=dash&utm_medium=qodequickview&utm_campaign=gopremium', esc_html__( 'Upgrade', 'qode-quick-view-for-woocommerce' ) );
+			}
 
 			return $links;
 		}

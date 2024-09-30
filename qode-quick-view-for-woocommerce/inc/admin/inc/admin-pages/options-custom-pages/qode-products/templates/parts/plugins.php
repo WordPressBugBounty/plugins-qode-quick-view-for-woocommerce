@@ -17,8 +17,10 @@ if ( ! empty( $plugins_list ) ) :
 				<div class="qodef-plugin-buttons-holder">
 					<a class="qodef-more-info qodef-body-font-family" href="<?php echo esc_url( $plugin_item['url'] ); ?>" target="_blank"><?php esc_html_e( 'More Info', 'qode-quick-view-for-woocommerce' ); ?></a>
 					<?php
+					$plugin_link_template = qode_quick_view_for_woocommerce_plugin_get_plugin_link( $plugin_key, $plugin_item );
+
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo qode_quick_view_for_woocommerce_plugin_get_plugin_link( $plugin_key, $plugin_item );
+					echo qode_quick_view_for_woocommerce_framework_wp_kses_html( 'html', $plugin_link_template );
 					?>
 				</div>
 			</div>

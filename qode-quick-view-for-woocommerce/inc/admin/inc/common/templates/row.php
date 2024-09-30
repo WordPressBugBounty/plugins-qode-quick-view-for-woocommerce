@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$row_description = $this_object->get_description();
 			if ( ! empty( $row_description ) ) {
 				?>
-				<p class="qodef-description qodef-row-description col-12"><?php echo esc_html( $row_description ); ?></p>
+				<p class="qodef-description qodef-row-description col-12"><?php echo wp_kses_post( $row_description ); ?></p>
 			<?php } ?>
 			<?php
 			foreach ( $this_object->get_children() as $child ) {

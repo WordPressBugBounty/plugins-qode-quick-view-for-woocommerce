@@ -60,8 +60,16 @@ class Qode_Quick_View_For_WooCommerce_Framework_Options_Taxonomy extends Qode_Qu
 	}
 
 	public function save_taxonomy_fields( $term_id ) {
+		// Don't allow users without capabilities to modify term.
+		if ( ! current_user_can( 'edit_term', $term_id ) ) {
+			return;
+		}
+
+		if ( ! isset( $_POST['qode_quick_view_for_woocommerce_framework_taxonomy_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['qode_quick_view_for_woocommerce_framework_taxonomy_nonce'] ) ), 'qode_quick_view_for_woocommerce_framework_taxonomy_nonce' ) ) {
+			return;
+		}
+
 		foreach ( $this->get_options() as $key => $value ) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$value = sanitize_meta( 'qode_quick_view_for_woocommerce_term_option', array_key_exists( $key, $_POST ) ? wp_unslash( $_POST[ $key ] ) : '', 'term' );
 
 			if ( '' !== $value ) {
@@ -71,8 +79,16 @@ class Qode_Quick_View_For_WooCommerce_Framework_Options_Taxonomy extends Qode_Qu
 	}
 
 	public function update_taxonomy_fields( $term_id ) {
+		// Don't allow users without capabilities to modify term.
+		if ( ! current_user_can( 'edit_term', $term_id ) ) {
+			return;
+		}
+
+		if ( ! isset( $_POST['qode_quick_view_for_woocommerce_framework_taxonomy_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['qode_quick_view_for_woocommerce_framework_taxonomy_nonce'] ) ), 'qode_quick_view_for_woocommerce_framework_taxonomy_nonce' ) ) {
+			return;
+		}
+
 		foreach ( $this->get_options() as $key => $value ) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$value = sanitize_meta( 'qode_quick_view_for_woocommerce_term_option', array_key_exists( $key, $_POST ) ? wp_unslash( $_POST[ $key ] ) : '', 'term' );
 
 			if ( '' !== $value ) {

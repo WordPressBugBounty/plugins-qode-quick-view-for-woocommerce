@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</svg>
 		<h2><?php esc_html_e( 'Support', 'qode-quick-view-for-woocommerce' ); ?></h2>
 		<p><?php esc_html_e( 'Our dedicated team of support pros is there for your plugin-related questions.', 'qode-quick-view-for-woocommerce' ); ?></p>
-		<a class="qodef-btn qodef-btn-underlined" href="https://qodeinteractive.com/submit-a-request/?utm_source=dash&utm_medium=quick-view&utm_campaign=help"><span class="qodef-btn-text"><?php esc_html_e( 'Submit a Ticket', 'qode-quick-view-for-woocommerce' ); ?></span></a>
+		<a class="qodef-btn qodef-btn-underlined" href="https://qodeinteractive.com/submit-a-request/?utm_source=dash&utm_medium=qodequickview&utm_campaign=help"><span class="qodef-btn-text"><?php esc_html_e( 'Submit a Ticket', 'qode-quick-view-for-woocommerce' ); ?></span></a>
 	</div>
 	<div class="qodef-custom-page-box">
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -31,8 +31,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</g>
 			</g>
 		</svg>
-		<h2><?php esc_html_e( 'Rate Qode Quick View', 'qode-quick-view-for-woocommerce' ); ?></h2>
-		<p><?php esc_html_e( 'Let us know about your experience with the Qode Quick View for WooCommerce.', 'qode-quick-view-for-woocommerce' ); ?></p>
+		<h2><?php esc_html_e( 'Rate QODE Quick View', 'qode-quick-view-for-woocommerce' ); ?></h2>
+		<p><?php esc_html_e( 'Let us know about your experience with the QODE Quick View for WooCommerce.', 'qode-quick-view-for-woocommerce' ); ?></p>
 		<a class="qodef-btn qodef-btn-underlined" href="https://wordpress.org/plugins/qode-quick-view-for-woocommerce/#reviews"><span class="qodef-btn-text"><?php esc_html_e( 'Rate Us', 'qode-quick-view-for-woocommerce' ); ?></span></a>
 	</div>
 </div>

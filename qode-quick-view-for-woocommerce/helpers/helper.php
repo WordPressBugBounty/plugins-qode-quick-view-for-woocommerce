@@ -63,6 +63,27 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_execute_template_with_p
 	}
 }
 
+if ( ! function_exists( 'qode_quick_view_for_woocommerce_sanitize_module_template_part' ) ) {
+	/**
+	 * Sanitize module template part.
+	 *
+	 * @param string $template temp path to file that is being loaded
+	 *
+	 * @return string - string with template path
+	 */
+	function qode_quick_view_for_woocommerce_sanitize_module_template_part( $template ) {
+		$available_characters = '/[^A-Za-z0-9\_\-\/]/';
+
+		if ( ! empty( $template ) && is_scalar( $template ) ) {
+			$template = preg_replace( $available_characters, '', $template );
+		} else {
+			$template = '';
+		}
+
+		return $template;
+	}
+}
+
 if ( ! function_exists( 'qode_quick_view_for_woocommerce_get_template_with_slug' ) ) {
 	/**
 	 * Loads module template part.
@@ -76,6 +97,8 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_get_template_with_slug'
 		$template = '';
 
 		if ( ! empty( $temp ) ) {
+			$slug = qode_quick_view_for_woocommerce_sanitize_module_template_part( $slug );
+
 			if ( ! empty( $slug ) ) {
 				$template = "$temp-$slug.php";
 
@@ -103,19 +126,8 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_get_template_part' ) ) 
 	 * @return string - string containing html of template
 	 */
 	function qode_quick_view_for_woocommerce_get_template_part( $module, $template, $slug = '', $params = array() ) {
-		$available_characters = '/[^A-Za-z0-9\_\-\/]/';
-
-		if ( is_scalar( $module ) ) {
-			$module = preg_replace( $available_characters, '', $module );
-		} else {
-			$module = '';
-		}
-
-		if ( is_scalar( $template ) ) {
-			$template = preg_replace( $available_characters, '', $template );
-		} else {
-			$template = '';
-		}
+		$module   = qode_quick_view_for_woocommerce_sanitize_module_template_part( $module );
+		$template = qode_quick_view_for_woocommerce_sanitize_module_template_part( $template );
 
 		$temp = QODE_QUICK_VIEW_FOR_WOOCOMMERCE_INC_PATH . '/' . $module . '/' . $template;
 

@@ -7,8 +7,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Qode_Quick_View_For_WooCommerce_Framework_Field_Textarea extends Qode_Quick_View_For_WooCommerce_Framework_Field_Type {
 
 	public function render_field() {
+		$rows = 10;
 		?>
-		<textarea class="form-control qodef-field" name="<?php echo esc_attr( $this->name ); ?>" rows="10"  placeholder="<?php echo isset( $this->args['placeholder'] ) ? esc_attr( esc_html( $this->args['placeholder'] ) ) : ''; ?>"
+		<?php
+		if ( ! empty( $this->args['rows'] ) ) :
+			$rows = $this->args['rows'];
+		endif;
+		?>
+		<textarea class="form-control qodef-field" name="<?php echo esc_attr( $this->name ); ?>" rows="<?php echo esc_attr( $rows ); ?>"  placeholder="<?php echo isset( $this->args['placeholder'] ) ? esc_attr( esc_html( $this->args['placeholder'] ) ) : ''; ?>"
 			<?php
 			if ( isset( $this->args['readonly'] ) ) {
 				echo ' readonly';

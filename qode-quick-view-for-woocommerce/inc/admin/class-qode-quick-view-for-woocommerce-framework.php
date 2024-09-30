@@ -67,18 +67,24 @@ if ( ! class_exists( 'Qode_Quick_View_For_WooCommerce_Framework' ) ) {
 			$qode_framework = qode_quick_view_for_woocommerce_framework_get_framework_root();
 
 			if ( ! empty( $qode_framework ) ) {
-				$page = $qode_framework->add_options_page(
-					array(
-						'scope'       => QODE_QUICK_VIEW_FOR_WOOCOMMERCE_OPTIONS_NAME,
-						'type'        => 'admin',
-						'slug'        => 'general',
-						'title'       => esc_html__( 'Global', 'qode-quick-view-for-woocommerce' ),
-						'description' => esc_html__( 'Global Plugin Options', 'qode-quick-view-for-woocommerce' ),
-					)
-				);
 
-				// Hook to include additional options after default options.
-				do_action( 'qode_quick_view_for_woocommerce_action_default_options_init', $page );
+				if ( apply_filters( 'qode_quick_view_for_woocommerce_filter_enable_global_options', true ) ) {
+					$page = $qode_framework->add_options_page(
+						array(
+							'scope'       => QODE_QUICK_VIEW_FOR_WOOCOMMERCE_OPTIONS_NAME,
+							'type'        => 'admin',
+							'slug'        => 'general',
+							'title'       => esc_html__( 'Global', 'qode-quick-view-for-woocommerce' ),
+							'description' => esc_html__( 'Global Plugin Options', 'qode-quick-view-for-woocommerce' ),
+						)
+					);
+
+					// Hook to include additional options after default options.
+					do_action( 'qode_quick_view_for_woocommerce_action_default_options_init', $page );
+				}
+
+				// Hook to include additional options.
+				do_action( 'qode_quick_view_for_woocommerce_action_core_options_init' );
 			}
 		}
 

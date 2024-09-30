@@ -1,4 +1,5 @@
 <?php
+
 if ( ! defined( 'ABSPATH' ) ) {
 	// Exit if accessed directly.
 	exit;
@@ -6,13 +7,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 foreach ( $this_object->get_child_elements() as $key => $child ) {
 	foreach ( $child->get_scope() as $scope ) {
-		if ( $taxonomy === $scope ) {
+		if ( $type === $scope ) {
 			$child->set_layout( $layout );
 			$child->render();
 
 			wp_nonce_field(
-				'qode_quick_view_for_woocommerce_framework_taxonomy_nonce',
-				'qode_quick_view_for_woocommerce_framework_taxonomy_nonce'
+				'qode_quick_view_for_woocommerce_framework_attribute_nonce',
+				'qode_quick_view_for_woocommerce_framework_attribute_nonce'
 			);
 		}
 	}

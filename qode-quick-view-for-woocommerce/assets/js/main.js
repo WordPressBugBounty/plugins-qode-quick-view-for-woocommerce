@@ -684,62 +684,6 @@
 })( jQuery );
 
 (function ( $ ) {
-	'use strict';
-
-	$( document ).ready(
-		function () {
-			qqvfwInitQuickViewPopUp.init();
-		}
-	);
-
-	$( document ).on(
-		'qode_wishlist_for_woocommerce_trigger_wishlist_table_updated',
-		function () {
-			qqvfwInitQuickViewPopUp.init();
-		}
-	);
-
-	/**
-	 * Function object that represents quick view area popup.
-	 *
-	 * @returns {{init: Function}}
-	 */
-	var qqvfwInitQuickViewPopUp = {
-		init: function () {
-			var $holder = $( '#qode-quick-view-for-woocommerce-pop-up' );
-
-			if ( $holder.length ) {
-				if ( qodeQuickViewForWooCommerce.qqvfwInitQuickView.attachQuickView( 'pop-up' ) ) {
-					qodeQuickViewForWooCommerce.qqvfwInitQuickViewButton.init( $holder );
-					qqvfwInitQuickViewPopUp.setEventsAction( $holder );
-				} else {
-					$holder.detach();
-				}
-			}
-		},
-		setEventsAction: function ( $holder ) {
-			$holder.children( '.qqvfw-m-overlay' ).on(
-				'click',
-				function () {
-					qodeQuickViewForWooCommerce.qqvfwInitQuickView.hideQuickView( $holder );
-				}
-			);
-
-			// Esc press.
-			$( window ).on(
-				'keyup',
-				function ( e ) {
-					if ( e.keyCode === 27 ) {
-						qodeQuickViewForWooCommerce.qqvfwInitQuickView.hideQuickView( $holder );
-					}
-				}
-			);
-		},
-	};
-
-})( jQuery );
-
-(function ( $ ) {
 
 	$( document ).on(
 		'qode_quick_view_for_woocommerce_trigger_quick_view',
@@ -835,5 +779,61 @@
 	};
 
 	qodeQuickViewForWooCommerce.qqvfwInitQuickViewButton = qqvfwInitQuickViewButton;
+
+})( jQuery );
+
+(function ( $ ) {
+	'use strict';
+
+	$( document ).ready(
+		function () {
+			qqvfwInitQuickViewPopUp.init();
+		}
+	);
+
+	$( document ).on(
+		'qode_wishlist_for_woocommerce_trigger_wishlist_table_updated',
+		function () {
+			qqvfwInitQuickViewPopUp.init();
+		}
+	);
+
+	/**
+	 * Function object that represents quick view area popup.
+	 *
+	 * @returns {{init: Function}}
+	 */
+	var qqvfwInitQuickViewPopUp = {
+		init: function () {
+			var $holder = $( '#qode-quick-view-for-woocommerce-pop-up' );
+
+			if ( $holder.length ) {
+				if ( qodeQuickViewForWooCommerce.qqvfwInitQuickView.attachQuickView( 'pop-up' ) ) {
+					qodeQuickViewForWooCommerce.qqvfwInitQuickViewButton.init( $holder );
+					qqvfwInitQuickViewPopUp.setEventsAction( $holder );
+				} else {
+					$holder.detach();
+				}
+			}
+		},
+		setEventsAction: function ( $holder ) {
+			$holder.children( '.qqvfw-m-overlay' ).on(
+				'click',
+				function () {
+					qodeQuickViewForWooCommerce.qqvfwInitQuickView.hideQuickView( $holder );
+				}
+			);
+
+			// Esc press.
+			$( window ).on(
+				'keyup',
+				function ( e ) {
+					if ( e.keyCode === 27 ) {
+						qodeQuickViewForWooCommerce.qqvfwInitQuickView.hideQuickView( $holder );
+					}
+				}
+			);
+		},
+	};
 
 })( jQuery );

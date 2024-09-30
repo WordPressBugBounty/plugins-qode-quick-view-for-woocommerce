@@ -38,32 +38,55 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="qodef-deactivation-modal-form-options">
 					<div class="qodef-deactivation-modal-form-option">
 						<input type="radio" id="qodef-deactivation-modal-form-option-no_longer_needed" class="qodef-deactivation-modal-form-option-input" name="reason_key" value="no_longer_needed"/>
-						<label for="qodef-deactivation-modal-form-option-no_longer_needed" class="qodef-deactivation-modal-form-option-label"><?php esc_html_e( 'I no longer need the plugin', 'qode-quick-view-for-woocommerce' ); ?></label>
+						<label for="qodef-deactivation-modal-form-option-no_longer_needed" class="qodef-deactivation-modal-form-option-label">
+							<span class="qodef-label-view"></span>
+							<span class="qodef-label-text">
+								<?php esc_html_e( 'I no longer need the plugin', 'qode-quick-view-for-woocommerce' ); ?>
+							</span>
+						</label>
 					</div>
 					<div class="qodef-deactivation-modal-form-option">
 						<input type="radio" id="qodef-deactivation-modal-form-option-found_a_better_plugin" class="qodef-deactivation-modal-form-option-input" name="reason_key" value="found_a_better_plugin"/>
-						<label for="qodef-deactivation-modal-form-option-found_a_better_plugin" class="qodef-deactivation-modal-form-option-label"><?php esc_html_e( 'I found a better plugin', 'qode-quick-view-for-woocommerce' ); ?></label>
+						<label for="qodef-deactivation-modal-form-option-found_a_better_plugin" class="qodef-deactivation-modal-form-option-label">
+							<span class="qodef-label-view"></span>
+							<span class="qodef-label-text">
+								<?php esc_html_e( 'I found a better plugin', 'qode-quick-view-for-woocommerce' ); ?>
+							</span>
+						</label>
 						<input type="text" class="qodef-deactivation-modal-form-option-text" name="reason_found_a_better_plugin" placeholder="<?php esc_attr_e( 'Please share which plugin', 'qode-quick-view-for-woocommerce' ); ?>">
 					</div>
 					<div class="qodef-deactivation-modal-form-option">
 						<input type="radio" id="qodef-deactivation-modal-form-option-couldnt_get_plugin_to_work" class="qodef-deactivation-modal-form-option-input" name="reason_key" value="couldnt_get_plugin_to_work"/>
-						<label for="qodef-deactivation-modal-form-option-couldnt_get_plugin_to_work" class="qodef-deactivation-modal-form-option-label"><?php esc_html_e( 'I couldn\'t get plugin to work', 'qode-quick-view-for-woocommerce' ); ?></label>
+						<label for="qodef-deactivation-modal-form-option-couldnt_get_plugin_to_work" class="qodef-deactivation-modal-form-option-label">
+							<span class="qodef-label-view"></span>
+							<span class="qodef-label-text">
+								<?php esc_html_e( 'I couldn\'t get plugin to work', 'qode-quick-view-for-woocommerce' ); ?>
+							</span>
+						</label>
 					</div>
 					<div class="qodef-deactivation-modal-form-option">
 						<input type="radio" id="qodef-deactivation-modal-form-option-temporary_deactivation" class="qodef-deactivation-modal-form-option-input" name="reason_key" value="temporary_deactivation"/>
-						<label for="qodef-deactivation-modal-form-option-temporary_deactivation" class="qodef-deactivation-modal-form-option-label"><?php esc_html_e( 'This is a temporary deactivation', 'qode-quick-view-for-woocommerce' ); ?></label>
+						<label for="qodef-deactivation-modal-form-option-temporary_deactivation" class="qodef-deactivation-modal-form-option-label">
+							<span class="qodef-label-view"></span>
+							<span class="qodef-label-text">
+								<?php esc_html_e( 'This is a temporary deactivation', 'qode-quick-view-for-woocommerce' ); ?>
+							</span>
+						</label>
 					</div>
 					<div class="qodef-deactivation-modal-form-option">
 						<input type="radio" id="qodef-deactivation-modal-form-option-<?php echo esc_attr( $plugin_slug ); ?>_premium" class="qodef-deactivation-modal-form-option-input" name="reason_key" value="<?php echo esc_attr( $plugin_slug ); ?>_premium"/>
 						<label for="qodef-deactivation-modal-form-option-<?php echo esc_attr( $plugin_slug ); ?>_premium" class="qodef-deactivation-modal-form-option-label">
-							<?php
-							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-							printf(
-								// translators: %s - Plugin name.
-								esc_html__( 'I have %s Premium', 'qode-quick-view-for-woocommerce' ),
-								esc_html( $plugin_name )
-							);
-							?>
+							<span class="qodef-label-view"></span>
+							<span class="qodef-label-text">
+								<?php
+								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								printf(
+									// translators: %s - Plugin name.
+									esc_html__( 'I have %s Premium', 'qode-quick-view-for-woocommerce' ),
+									esc_html( $plugin_name )
+								);
+								?>
+							</span>
 						</label>
 						<div class="qodef-deactivation-modal-form-option-text">
 							<?php
@@ -80,7 +103,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</div>
 					<div class="qodef-deactivation-modal-form-option">
 						<input type="radio" id="qodef-deactivation-modal-form-option-other" class="qodef-deactivation-modal-form-option-input" name="reason_key" value="other"/>
-						<label for="qodef-deactivation-modal-form-option-other" class="qodef-deactivation-modal-form-option-label"><?php esc_html_e( 'Other', 'qode-quick-view-for-woocommerce' ); ?></label>
+						<label for="qodef-deactivation-modal-form-option-other" class="qodef-deactivation-modal-form-option-label">
+							<span class="qodef-label-view"></span>
+							<span class="qodef-label-text">
+								<?php esc_html_e( 'Other', 'qode-quick-view-for-woocommerce' ); ?>
+							</span>
+						</label>
 						<input type="text" class="qodef-deactivation-modal-form-option-text" name="reason_other" placeholder="<?php esc_attr_e( 'Please share the reason', 'qode-quick-view-for-woocommerce' ); ?>">
 					</div>
 				</div>

@@ -3,6 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	// Exit if accessed directly.
 	exit;
 }
+$cpt_pages = apply_filters( 'qode_quick_view_for_woocommerce_filter_admin_pages_cpt', array() );
 ?>
 <div class="qodef-tabs-navigation-wrapper">
 	<div class="qodef-tabs-navigation-wrapper-inner">
@@ -54,6 +55,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 							</span>
 						</li>
 					<?php } ?>
+					<?php
+					if ( is_array( $cpt_pages ) && count( $cpt_pages ) ) {
+						foreach ( $cpt_pages as $cpt => $name ) {
+							$this_post_type = get_post_type();
+							$active_class   = '';
+
+							if ( ! empty( $this_post_type ) && $this_post_type === $cpt ) {
+								$active_class = 'qodef-active';
+							}
+							?>
+							<li class="nav-item <?php echo esc_attr( $active_class ); ?>">
+								<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=' . $cpt ) ); ?>">
+									<span class="nav-link">
+										<?php echo esc_html( $name ); ?>
+									</span>
+								</a>
+							</li>
+							<?php
+						}
+					}
+					?>
 				</ul>
 			</div>
 		</nav>

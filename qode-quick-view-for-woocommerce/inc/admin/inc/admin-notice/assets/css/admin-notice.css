@@ -1,22 +1,35 @@
 @font-face {
-	font-family: 'Roboto';
-	src: url("../../../admin-pages/assets/fonts/Roboto-Regular.ttf") format("truetype");
+	font-family: 'DM Sans';
+	src: url("../../../common/assets/fonts/DMSans-Regular.ttf") format("truetype");
 	font-weight: 400;
 }
 
 @font-face {
-	font-family: 'Heebo';
-	src: url("../../../admin-pages/assets/fonts/Heebo-Regular.ttf") format("truetype");
+	font-family: 'DM Sans';
+	src: url("../../../common/assets/fonts/DMSans-Medium.ttf") format("truetype");
 	font-weight: 500;
+}
+
+@font-face {
+	font-family: 'DM Sans';
+	src: url("../../../common/assets/fonts/DMSans-SemiBold.ttf") format("truetype");
+	font-weight: 600;
+}
+
+@font-face {
+	font-family: 'DM Sans';
+	src: url("../../../common/assets/fonts/DMSans-Bold.ttf") format("truetype");
+	font-weight: 700;
 }
 
 #qode-quick-view-for-woocommerce-deactivation-modal p {
 	margin: 0;
 	padding: 0;
-	font-family: 'Roboto', sans-serif;
-	font-size: 15px;
-	line-height: 1.6em;
+	font-family: 'DM Sans', sans-serif;
+	font-size: 13px;
+	line-height: 20px;
 	font-weight: 400;
+	color: #1d1d1d;
 }
 
 #qode-quick-view-for-woocommerce-deactivation-modal .qodef-btn {
@@ -24,13 +37,13 @@
 	vertical-align: middle;
 	width: auto;
 	margin: 0;
-	font-family: 'Heebo', sans-serif;
-	font-size: 12px;
+	font-family: 'DM Sans', sans-serif;
+	font-size: 13px;
 	line-height: 2em;
-	font-weight: 500;
+	font-weight: 700;
 	text-transform: uppercase;
-	border-radius: 30px;
-	letter-spacing: 0.13em;
+	border-radius: 5px;
+	letter-spacing: 0.02em;
 	outline: none;
 	box-sizing: border-box;
 	transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
@@ -38,7 +51,7 @@
 	text-decoration: none;
 	box-shadow: none;
 	display: inline-block;
-	padding: 9px 30px;
+	padding: 7px 23px;
 }
 
 #qode-quick-view-for-woocommerce-deactivation-modal .qodef-btn.qodef-btn-solid {
@@ -111,9 +124,10 @@
 #qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content {
 	width: 620px;
 	background-color: #fff;
-	padding: 34px 40px 44px;
+	padding: 34px 40px 40px;
 	box-sizing: border-box;
 	position: relative;
+	border-radius: 5px;
 }
 
 #qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-close {
@@ -124,24 +138,100 @@
 }
 
 #qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-title {
-	font-family: 'Heebo', sans-serif;
-	font-size: 32px;
-	line-height: 1.25em;
-	font-weight: 500;
-	margin: 0 0 19px;
+	font-family: 'DM Sans', sans-serif;
+	font-size: 18px;
+	line-height: 1.1em;
+	font-weight: 600;
+	color: #000;
+	margin: 0 0 15px;
 }
 
 #qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-caption {
 	margin: 0 0 14px;
-	padding-right: 25%;
+	padding-right: 20%;
 }
 
 #qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-options {
+	display: flex;
+	flex-direction: column;
 	padding-right: 23%;
+	gap: 14px;
 }
 
 #qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-options .qodef-deactivation-modal-form-option {
-	margin: 0 0 6px;
+	position: relative;
+	display: inline-block;
+	padding-right: 15px;
+	margin-bottom: 0;
+	vertical-align: middle;
+	font-weight: 400;
+	cursor: pointer;
+}
+
+#qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-options .qodef-deactivation-modal-form-option input[type=radio] {
+	width: 17px;
+	height: 17px;
+	max-height: 17px;
+	border-radius: 17px;
+	position: absolute;
+	display: inline-block;
+	vertical-align: top;
+	top: 0;
+	left: 0;
+	margin: 0;
+	border: 0;
+	box-shadow: none;
+}
+
+#qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-options .qodef-deactivation-modal-form-option input[type=radio] + label {
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+	line-height: 0;
+	pointer-events: none;
+	cursor: pointer;
+}
+
+#qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-options .qodef-deactivation-modal-form-option input[type=radio] + label .qodef-label-text {
+	display: inline-block;
+	padding-left: 10px;
+	line-height: 17px;
+	color: #1d1d1d;
+	font-family: 'DM Sans', sans-serif;
+}
+
+#qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-options .qodef-deactivation-modal-form-option input[type=radio] + label .qodef-label-view {
+	display: inline-block;
+	vertical-align: top;
+	width: 17px;
+	height: 17px;
+	background-color: #fff;
+	border: 1px solid #7c7c7c;
+	border-radius: 17px;
+	cursor: pointer;
+	box-sizing: border-box;
+	flex-shrink: 0;
+}
+
+#qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-options .qodef-deactivation-modal-form-option input[type=radio] + label .qodef-label-view:hover {
+	cursor: pointer;
+}
+
+#qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-options .qodef-deactivation-modal-form-option input[type=radio] + label .qodef-label-view:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 17px;
+	height: 17px;
+	border-radius: 17px;
+	border: 5px solid #ee2852;
+	opacity: 0;
+	box-sizing: border-box;
+}
+
+#qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-options .qodef-deactivation-modal-form-option input[type=radio]:checked + label .qodef-label-view:after {
+	opacity: 1;
 }
 
 #qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-options .qodef-deactivation-modal-form-option .qodef-deactivation-modal-form-option-input {
@@ -167,20 +257,27 @@
 
 #qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-options .qodef-deactivation-modal-form-option .qodef-deactivation-modal-form-option-label {
 	display: block;
-	font-family: 'Roboto', sans-serif;
-	font-size: 15px;
-	line-height: 1.6em;
+	font-family: 'DM Sans', sans-serif;
+	font-size: 13px;
+	line-height: 20px;
+	font-weight: 400;
+	color: #1d1d1d;
 }
 
 #qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-options .qodef-deactivation-modal-form-option .qodef-deactivation-modal-form-option-text {
 	margin: 6px 0 10px 26px;
 	width: calc(100% - 32px);
-	font-family: 'Roboto', sans-serif;
-	color: #696969;
+	font-family: 'DM Sans', sans-serif;
 	font-size: 13px;
-	border-radius: 5em;
-	border: 1px solid #dedee1;
-	padding: 11px 24px;
+	line-height: 30px;
+	font-weight: 400;
+	color: #696969;
+	border: 1px solid #bbb;
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 2.5px 13px;
+	max-width: 290px;
+	min-height: 35px;
 }
 
 #qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-options .qodef-deactivation-modal-form-option .qodef-deactivation-modal-form-option-text:focus {
@@ -193,7 +290,8 @@
 	border: none;
 	padding: 0;
 	color: #ee2852;
-	margin: 4px 0 11px 26px;
+	line-height: 20px;
+	margin: 6px 0 0 26px;
 }
 
 #qode-quick-view-for-woocommerce-deactivation-modal .qodef-deactivation-modal-content .qodef-deactivation-modal-form-buttons {

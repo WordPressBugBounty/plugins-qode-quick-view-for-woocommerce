@@ -2,9 +2,9 @@
 Contributors: qodeinteractive
 Tags: quick view, quickview, product quick view, woocommerce lightbox, product popup
 Requires at least: 6.3
-Tested up to: 6.4
+Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -115,6 +115,11 @@ Feel free to try out some of our other products:
 8. Quick View Pop-up Demo.
 
 == Changelog ==
+
+= 1.0.5 - 26-09-2024 =
+- Improved Admin deactivation notice style
+- Improved framework
+- Minor fixes
 
 = 1.0.4 - 04-06-2024 =
 - Added additional plugin action links

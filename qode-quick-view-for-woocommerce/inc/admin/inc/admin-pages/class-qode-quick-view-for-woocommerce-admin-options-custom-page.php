@@ -11,6 +11,7 @@ class Qode_Quick_View_For_WooCommerce_Admin_Options_Custom_Page {
 	private $position;
 	private $icon;
 	private $style;
+	private $script;
 
 	public function __construct( $params ) {
 		$this->slug     = isset( $params['slug'] ) ? $params['slug'] : '';
@@ -18,6 +19,7 @@ class Qode_Quick_View_For_WooCommerce_Admin_Options_Custom_Page {
 		$this->position = isset( $params['position'] ) ? $params['position'] : '';
 		$this->icon     = isset( $params['icon'] ) ? $params['icon'] : '';
 		$this->style    = isset( $params['style'] ) ? $params['style'] : true;
+		$this->script   = isset( $params['script'] ) ? $params['script'] : true;
 	}
 
 	public function get_slug() {
@@ -40,9 +42,12 @@ class Qode_Quick_View_For_WooCommerce_Admin_Options_Custom_Page {
 		return $this->style;
 	}
 
+	public function get_script() {
+		return $this->script;
+	}
+
 	public function render() {
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo qode_quick_view_for_woocommerce_framework_get_template_part( QODE_QUICK_VIEW_FOR_WOOCOMMERCE_ADMIN_PATH . '/inc', 'admin-pages/options-custom-pages/' . $this->slug, 'templates/' . $this->slug, '' );
+		qode_quick_view_for_woocommerce_framework_template_part( QODE_QUICK_VIEW_FOR_WOOCOMMERCE_ADMIN_PATH . '/inc', 'admin-pages/options-custom-pages/' . $this->slug, 'templates/' . $this->slug, '' );
 	}
 
 	public function add_to_custom_nav( $pages ) {
@@ -75,10 +80,14 @@ class Qode_Quick_View_For_WooCommerce_Admin_Options_Custom_Page {
 
 	public function enqueue_scripts() {
 		// phpcs:ignore WordPress.Security.NonceVerification
-		if ( true === $this->get_style() && isset( $_GET['page'] ) && QODE_QUICK_VIEW_FOR_WOOCOMMERCE_MENU_NAME === sanitize_text_field( wp_unslash( $_GET['page'] ) ) && isset( $_GET['template'] ) && $this->get_slug() === sanitize_text_field( wp_unslash( $_GET['template'] ) ) ) {
+		if ( true === $this->get_script() && isset( $_GET['page'] ) && QODE_QUICK_VIEW_FOR_WOOCOMMERCE_MENU_NAME === sanitize_text_field( wp_unslash( $_GET['page'] ) ) && isset( $_GET['template'] ) && $this->get_slug() === sanitize_text_field( wp_unslash( $_GET['template'] ) ) ) {
 			// phpcs:ignore WordPress.WP.EnqueuedResourceParameters
 			wp_enqueue_script( 'qode-quick-view-for-woocommerce-' . $this->get_slug() . '-script', QODE_QUICK_VIEW_FOR_WOOCOMMERCE_ADMIN_URL_PATH . '/inc/admin-pages/options-custom-pages/' . $this->get_slug() . '/assets/js/' . $this->get_slug() . '.js' );
+		}
 
+		// phpcs:ignore WordPress.Security.NonceVerification
+		if ( isset( $_GET['page'] ) && QODE_QUICK_VIEW_FOR_WOOCOMMERCE_MENU_NAME === sanitize_text_field( wp_unslash( $_GET['page'] ) ) && isset( $_GET['template'] ) && $this->get_slug() === sanitize_text_field( wp_unslash( $_GET['template'] ) ) ) {
+			// phpcs:ignore WordPress.WP.EnqueuedResourceParameters
 			do_action( 'qode_quick_view_for_woocommerce_action_additional_scripts_on_options_page_' . $this->get_slug() );
 		}
 	}
