@@ -8,7 +8,7 @@ class Qode_Quick_View_For_WooCommerce_Framework_Field_WP_Image extends Qode_Quic
 	public function render_field() {
 		$hide_class = empty( $this->params['value'] ) ? 'qodef-hide' : '';
 		?>
-		<div class="qodef-image-uploader" data-multiple="<?php echo esc_attr( $this->multiple ); ?>">
+		<div class="qodef-image-uploader" data-file="no" data-multiple="<?php echo esc_attr( $this->multiple ); ?>">
 			<div class="qodef-image-thumb <?php echo esc_attr( $hide_class ); ?>">
 				<?php if ( 'yes' === $this->multiple ) { ?>
 					<ul class="clearfix">

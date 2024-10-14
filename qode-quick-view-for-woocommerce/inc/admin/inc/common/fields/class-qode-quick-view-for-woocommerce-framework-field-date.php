@@ -24,7 +24,7 @@ class Qode_Quick_View_For_WooCommerce_Framework_Field_Date extends Qode_Quick_Vi
 
 	public function render_field() {
 		?>
-		<input type="text" data-date-format="<?php echo esc_attr( $this->params['date_format'] ); ?>" class="qodef-field qodef-input qodef-datepicker" name="<?php echo esc_attr( $this->name ); ?>" value="<?php echo esc_attr( $this->params['value'] ); ?>" autocomplete="off" readonly/>
+		<input type="text" data-date-format="<?php echo esc_attr( $this->params['date_format'] ); ?>" <?php qode_quick_view_for_woocommerce_inline_attrs( $this->data_attrs ); ?> class="qodef-field qodef-input qodef-datepicker" name="<?php echo esc_attr( $this->name ); ?>" value="<?php echo esc_attr( $this->params['value'] ); ?>" autocomplete="off" readonly/>
 		<?php
 	}
 }

@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'QODE_QUICK_VIEW_FOR_WOOCOMMERCE_VERSION', '1.0.5' );
+define( 'QODE_QUICK_VIEW_FOR_WOOCOMMERCE_VERSION', '1.0.6' );
 define( 'QODE_QUICK_VIEW_FOR_WOOCOMMERCE_ABS_PATH', __DIR__ );
 define( 'QODE_QUICK_VIEW_FOR_WOOCOMMERCE_REL_PATH', dirname( plugin_basename( __FILE__ ) ) );
 define( 'QODE_QUICK_VIEW_FOR_WOOCOMMERCE_URL_PATH', plugin_dir_url( __FILE__ ) );

@@ -19,8 +19,7 @@ if ( ! empty( $plugins_list ) ) :
 					<?php
 					$plugin_link_template = qode_quick_view_for_woocommerce_plugin_get_plugin_link( $plugin_key, $plugin_item );
 
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo qode_quick_view_for_woocommerce_framework_wp_kses_html( 'html', $plugin_link_template );
+					echo wp_kses_post( $plugin_link_template );
 					?>
 				</div>
 			</div>

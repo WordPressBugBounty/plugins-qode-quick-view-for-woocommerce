@@ -28,8 +28,6 @@
 				qodefSelect2.init( $mainHolder );
 				qodefInitIconPicker.init( $mainHolder );
 
-				qodefPostFormatsDependency.init();
-
 				if ( $adminPageHolder.length ) {
 					qodefSearchOptions.init( $adminPageHolder );
 				}
@@ -42,12 +40,6 @@
 				// If there is no main holder, but there is a cpt holder, admin needs to reinit for header and navigation.
 				qodefAdminOptionsPanel.adminReInit();
 			}
-		}
-	);
-
-	$( window ).load(
-		function () {
-			qodefPostFormatsDependency.init( true );
 		}
 	);
 
@@ -78,8 +70,12 @@
 	$( document ).on(
 		'widget-added widget-updated',
 		function ( event, widget ) {
-			qodefWidgetFields.initColorPicker( widget );
-			qodefWidgetFields.initDependency( widget );
+			var $widgetID = typeof widget !== 'undefined' ? widget.find( '[name="id_base"]' ) : '';
+
+			if ( $widgetID && $widgetID.val().includes( 'quick-view' ) ) {
+				qodefWidgetFields.initColorPicker( widget );
+				qodefWidgetFields.initDependency( widget );
+			}
 		}
 	);
 
@@ -87,23 +83,23 @@
 		'ajaxSuccess',
 		function ( event, xhr, options ) {
 
-			if ( options && options.data && -1 === options.data.indexOf( 'action=add-tag' ) ) {
-				return;
-			}
+			// Edit tags dashboard page event.
+			if ( options && options.data && -1 !== options.data.indexOf( 'action=add-tag' ) ) {
+				var $colorFields = $( '.qodef-field-color' );
 
-			var $colorFields = $( '.qodef-field-color' );
-			if ( $colorFields.length ) {
-				$colorFields.each(
-					function () {
-						var clearButton = $( this ).find( '.wp-picker-clear' );
+				if ( $colorFields.length ) {
+					$colorFields.each(
+						function () {
+							var clearButton = $( this ).find( '.wp-picker-clear' );
 
-						if ( clearButton.length ) {
-							clearButton.trigger(
-								'click'
-							);
+							if ( clearButton.length ) {
+								clearButton.trigger(
+									'click'
+								);
+							}
 						}
-					}
-				);
+					);
+				}
 			}
 		}
 	);
@@ -161,9 +157,9 @@
 
 			$tabsWrapper.on(
 				'mousedown',
-				(e) => {
+				function ( e ) {
 					e.preventDefault();
-					isDown     = true;
+					isDown = true;
 					$tabsWrapper.addClass( 'qodef-drag' );
 					startX     = e.pageX - $tabsWrapper[0].offsetLeft;
 					scrollLeft = $tabsWrapper[0].scrollLeft;
@@ -171,33 +167,35 @@
 			);
 			$tabsWrapper.on(
 				'mousewheel',
-				(event, delta) => {
-					$tabsWrapper[0].scrollLeft -= (delta * 20);
+				function ( event, delta ) {
+					$tabsWrapper[0].scrollLeft  -= (delta * 20);
 					$tabsWrapper[0].scrollRight -= (delta * 20);
 					event.preventDefault();
 				}
 			);
 			$tabsWrapper.on(
 				'mouseleave',
-				() => {
+				function () {
 					isDown = false;
 					$tabsWrapper.removeClass( 'qodef-drag' );
 				}
 			);
 			$tabsWrapper.on(
 				'mouseup',
-				() => {
+				function () {
 					isDown = false;
 					$tabsWrapper.removeClass( 'qodef-drag' );
 				}
 			);
 			$tabsWrapper.on(
 				'mousemove',
-				( e ) => {
-					if ( ! isDown ) return;
+				function ( e ) {
+					if ( ! isDown ) {
+						return;
+					}
 					e.preventDefault();
-					var x                = e.pageX - $tabsWrapper[0].offsetLeft;
-					var walk             = (x - startX) ;
+					var x                      = e.pageX - $tabsWrapper[0].offsetLeft;
+					var walk                   = (x - startX);
 					$tabsWrapper[0].scrollLeft = scrollLeft - walk;
 				}
 			);
@@ -808,7 +806,7 @@
 		init: function () {
 			// need to be plugin unique.
 			$( document ).on(
-				'qode_quick_view_for_woocommerce__add_new_row_trigger',
+				'qode_quick_view_for_woocommerce_add_new_row_trigger',
 				function ( event, $row ) {
 					if ( typeof qodefSearchOptions.fieldHolder !== 'undefined' ) {
 						qodefSearchOptions.fieldHolder.push( $row );
@@ -834,7 +832,7 @@
 				this.setActivePanel();
 				this.navigationReset();
 
-				if ( qodefFramework.windowWidth <= 800 ) {
+				if ( qodefFramework.windowWidth <= 1180 ) {
 					this.mobile( this.adminPage );
 				}
 			}
@@ -900,7 +898,7 @@
 			this.adminPage = $( '.qodef-admin-page-v4' );
 			this.adminHeaderPosition();
 
-			if ( qodefFramework.windowWidth <= 800 ) {
+			if ( qodefFramework.windowWidth <= 1180 ) {
 				this.mobile( this.adminPage );
 			}
 
@@ -921,10 +919,11 @@
 			var template  = urlParams.get( 'template' );
 			var postType  = urlParams.get( 'post_type' );
 			var post      = urlParams.get( 'post' );
+			var taxonomy  = urlParams.get( 'taxonomy' );
 
 			// If we are on a page that has template, post_type or post parameters in url.
 			// ergo it is not default options page than make a reload.
-			if ( template !== null || postType !== null || post !== null ) {
+			if ( template !== null || postType !== null || post !== null || taxonomy !== null ) {
 				this.setCookie(
 					'qodefQuickViewActiveTab',
 					panelName
@@ -943,6 +942,9 @@
 						panelName
 					);
 
+					window.location = item.data( 'options-url' );
+					return;
+				} else if ( item.hasClass( 'qodef-layout-custom' ) && item.hasClass( 'qodef-active' ) && click_trigger && item.data( 'options-url' ) ) {
 					window.location = item.data( 'options-url' );
 					return;
 				}
@@ -1109,12 +1111,12 @@
 								'marginTop',
 								qodefAdminOptionsPanel.adminHeaderHeight
 							);
-							if ( qodefFramework.windowWidth > 800 ) {
+							if ( qodefFramework.windowWidth > 1180 ) {
 								qodefAdminOptionsPanel.adminNavigation.css(
 									'marginTop',
 									0
 								);
-							} else if ( qodefFramework.windowWidth <= 800 ) {
+							} else if ( qodefFramework.windowWidth <= 1180 ) {
 								qodefAdminOptionsPanel.adminNavigation.css(
 									'marginTop',
 									qodefAdminOptionsPanel.adminBarHeight + qodefAdminOptionsPanel.adminHeaderHeight
@@ -1129,12 +1131,12 @@
 								'marginTop',
 								0
 							);
-							if ( qodefFramework.windowWidth > 800 ) {
+							if ( qodefFramework.windowWidth > 1180 ) {
 								qodefAdminOptionsPanel.adminNavigation.css(
 									'marginTop',
 									qodefAdminOptionsPanel.adminHeaderHeight
 								);
-							} else if ( qodefFramework.windowWidth <= 800 ) {
+							} else if ( qodefFramework.windowWidth <= 1180 ) {
 								qodefAdminOptionsPanel.adminNavigation.css(
 									'marginTop',
 									qodefAdminOptionsPanel.adminHeader.offset().top + qodefAdminOptionsPanel.adminHeaderHeight - qodefFramework.scroll
@@ -1391,6 +1393,8 @@
 		}
 	};
 
+	qodefFramework.qodefInitMediaUploader = qodefInitMediaUploader;
+
 	var qodefColorPicker = {
 		init: function ( $mainHolder ) {
 			this.$holder = $mainHolder.find( '.qodef-color-field:not(.widefat)' );
@@ -1463,6 +1467,8 @@
 		}
 	};
 
+	qodefFramework.qodefDatePicker = qodefDatePicker;
+
 	var qodefSelect2 = {
 		init: function ( $mainHolder ) {
 			this.$holder = $mainHolder.find( 'select.qodef-select2' );
@@ -1525,134 +1531,7 @@
 		}
 	};
 
-	var qodefPostFormatsDependency = {
-		init: function ( onLoad ) {
-			if ( onLoad ) {
-				qodefPostFormatsDependency.initObserver();
-				qodefPostFormatsDependency.gutenbergEditor();
-			} else {
-				qodefPostFormatsDependency.classicEditor();
-			}
-		},
-		initObserver: function () {
-			var $holder = $( '.edit-post-sidebar' );
-
-			if ( $holder.length ) {
-				var mutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-
-				// create mutation observer prototype for class changes.
-				$.fn.attrChange = function ( attrChangeCallback ) {
-					if ( mutationObserver ) {
-						var options = {
-							attributes: true,
-							attributeFilter: ['class'],
-							subtree: false,
-						};
-
-						var observer = new mutationObserver(
-							function ( mutations ) {
-								mutations.forEach(
-									function ( event ) {
-										attrChangeCallback.call( event.target );
-									}
-								);
-							}
-						);
-
-						return this.each(
-							function () {
-								observer.observe(
-									this,
-									options
-								);
-							}
-						);
-					}
-				};
-
-				// append event listener.
-				$holder.find( '.edit-post-sidebar__panel-tabs ul li:first-child button' ).attrChange(
-					function () {
-						if ( $( this ).hasClass( 'is-active' ) ) {
-							qodefPostFormatsDependency.gutenbergEditor();
-						}
-					}
-				);
-			}
-		},
-		classicEditor: function () {
-			var $holder          = $( '#post-formats-select' ),
-				$postFormats     = $holder.find( 'input[name="post_format"]' ),
-				$selectedFormat  = $holder.find( 'input[name="post_format"]:checked' ),
-				selectedFormatID = $selectedFormat.attr( 'id' );
-
-			// This is temporary case - waiting ui style.
-			$postFormats.each(
-				function () {
-					qodefPostFormatsDependency.metaBoxVisibility(
-						false,
-						$( this ).attr( 'id' )
-					);
-				}
-			);
-
-			qodefPostFormatsDependency.metaBoxVisibility(
-				true,
-				selectedFormatID
-			);
-
-			$postFormats.change(
-				function () {
-					qodefPostFormatsDependency.classicEditor();
-				}
-			);
-		},
-		gutenbergEditor: function () {
-			var $holder = $( '.edit-post-sidebar' );
-
-			if ( $holder.length ) {
-				var $postFormats    = $holder.find( '.editor-post-format' ),
-					$selectedFormat = $postFormats.find( 'select option:selected' );
-
-				$postFormats.find( 'select option' ).each(
-					function () {
-						qodefPostFormatsDependency.metaBoxVisibility(
-							false,
-							'post_format_' + $( this ).val()
-						);
-					}
-				);
-
-				if ( $selectedFormat.length ) {
-					qodefPostFormatsDependency.metaBoxVisibility(
-						true,
-						'post_format_' + $selectedFormat.val()
-					);
-				}
-
-				$postFormats.find( 'select' ).one(
-					'change',
-					function () {
-						qodefPostFormatsDependency.gutenbergEditor();
-					}
-				);
-			}
-		},
-		metaBoxVisibility: function ( visibility, itemID ) {
-			if ( itemID !== '' && itemID !== undefined ) {
-				var postFormatName = itemID.replace(
-					/-/g,
-					'_'
-				);
-
-				if ( visibility ) {
-					$( '.qodef-section-name-qodef_' + postFormatName + '_section' ).fadeIn();
-				} else {
-					$( '.qodef-section-name-qodef_' + postFormatName + '_section' ).hide();
-				}
-			}
-		}
-	};
+	qodefFramework.qodefInitIconPicker = qodefInitIconPicker;
 
 	var qodefAddressFields = {
 		init: function ( $mainHolder, trigger ) {
@@ -1835,6 +1714,8 @@
 			this.searchField.val( '' );
 		}
 	};
+
+	qodefFramework.qodefSearchOptions = qodefSearchOptions;
 
 	var qodefAdminScroll = {
 		disable: function () {

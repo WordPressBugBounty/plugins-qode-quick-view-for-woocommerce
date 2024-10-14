@@ -25,7 +25,7 @@ class Qode_Quick_View_For_WooCommerce_Framework_Field_Radio extends Qode_Quick_V
 					?>
 					<div class="qodef-inline">
 						<?php if ( ! $use_images ) { ?>
-							<input class="qodef-field" <?php echo esc_attr( $checked ); ?> type="radio" id="<?php echo esc_attr( $this->name . $key ); ?>" name="<?php echo esc_attr( $this->name ); ?>" value="<?php echo esc_attr( $key ); ?>">
+							<input class="qodef-field" <?php echo esc_attr( $checked ); ?> <?php qode_quick_view_for_woocommerce_inline_attrs( $this->data_attrs ); ?> type="radio" id="<?php echo esc_attr( $this->name . $key ); ?>" name="<?php echo esc_attr( $this->name ); ?>" value="<?php echo esc_attr( $key ); ?>">
 							<?php if ( ! empty( $label ) ) { ?>
 								<label for="<?php echo esc_attr( $this->name . $key ); ?>">
 									<span class="qodef-label-view"></span>
@@ -36,7 +36,7 @@ class Qode_Quick_View_For_WooCommerce_Framework_Field_Radio extends Qode_Quick_V
 							<?php } ?>
 						<?php } else { ?>
 							<label for="<?php echo esc_attr( $this->name . $key ); ?>">
-								<input class="qodef-field" <?php echo esc_attr( $checked ); ?> type="radio" id="<?php echo esc_attr( $this->name . $key ); ?>" name="<?php echo esc_attr( $this->name ); ?>" value="<?php echo esc_attr( $key ); ?>">
+								<input class="qodef-field" <?php echo esc_attr( $checked ); ?> <?php qode_quick_view_for_woocommerce_inline_attrs( $this->data_attrs ); ?> type="radio" id="<?php echo esc_attr( $this->name . $key ); ?>" name="<?php echo esc_attr( $this->name ); ?>" value="<?php echo esc_attr( $key ); ?>">
 								<img title="<?php echo ! empty( $label ) ? esc_attr( $label ) : ''; ?>" src="<?php echo esc_url( $value['image'] ); ?>" alt="<?php echo esc_attr( $key . ' image' ); ?>"/>
 							</label>
 						<?php } ?>

@@ -14,7 +14,7 @@ class Qode_Quick_View_For_WooCommerce_Framework_Field_Textarea extends Qode_Quic
 			$rows = $this->args['rows'];
 		endif;
 		?>
-		<textarea class="form-control qodef-field" name="<?php echo esc_attr( $this->name ); ?>" rows="<?php echo esc_attr( $rows ); ?>"  placeholder="<?php echo isset( $this->args['placeholder'] ) ? esc_attr( esc_html( $this->args['placeholder'] ) ) : ''; ?>"
+		<textarea class="form-control qodef-field" <?php qode_quick_view_for_woocommerce_inline_attrs( $this->data_attrs ); ?> name="<?php echo esc_attr( $this->name ); ?>" rows="<?php echo esc_attr( $rows ); ?>"  placeholder="<?php echo isset( $this->args['placeholder'] ) ? esc_attr( esc_html( $this->args['placeholder'] ) ) : ''; ?>"
 			<?php
 			if ( isset( $this->args['readonly'] ) ) {
 				echo ' readonly';

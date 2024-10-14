@@ -317,12 +317,16 @@ class Qode_Quick_View_For_WooCommerce_Framework_Options_Admin extends Qode_Quick
 	public function is_allowed_admin_cpt_page() {
 		global $pagenow;
 
-		$pages = apply_filters( 'qode_quick_view_for_woocommerce_filter_framework_nav_pages', array( 'post.php', 'post-new.php', 'edit.php' ) );
-		$cpts  = apply_filters( 'qode_quick_view_for_woocommerce_filter_framework_nav_cpts', array() );
+		$pages      = apply_filters( 'qode_quick_view_for_woocommerce_filter_framework_nav_pages', array( 'post.php', 'post-new.php', 'edit.php', 'edit-tags.php', 'term.php' ) );
+		$cpts       = apply_filters( 'qode_quick_view_for_woocommerce_filter_framework_nav_cpts', array() );
+		$taxonomies = apply_filters( 'qode_quick_view_for_woocommerce_filter_framework_nav_taxonomies', array() );
 
 		// phpcs:ignore WordPress.Security.NonceVerification
 		$current_post_type = isset( $_GET['post_type'] ) ? sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) : get_post_type();
 
-		return is_admin() && in_array( $pagenow, $pages, true ) && in_array( $current_post_type, $cpts, true );
+		// phpcs:ignore WordPress.Security.NonceVerification
+		$current_taxonomy = isset( $_GET['taxonomy'] ) ? sanitize_text_field( wp_unslash( $_GET['taxonomy'] ) ) : get_current_screen()->taxonomy;
+
+		return is_admin() && in_array( $pagenow, $pages, true ) && ( in_array( $current_post_type, $cpts, true ) || in_array( $current_taxonomy, $taxonomies, true ) );
 	}
 }

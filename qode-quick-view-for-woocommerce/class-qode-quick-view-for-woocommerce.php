@@ -5,7 +5,7 @@ Description: QODE Quick View for WooCommerce helps you boost conversions & sales
 Author: Qode Interactive
 Author URI: https://qodeinteractive.com/
 Plugin URI: https://qodeinteractive.com/qode-quick-view-for-woocommerce/
-Version: 1.0.5
+Version: 1.0.6
 Requires at least: 6.3
 Requires PHP: 7.4
 License: GPLv3

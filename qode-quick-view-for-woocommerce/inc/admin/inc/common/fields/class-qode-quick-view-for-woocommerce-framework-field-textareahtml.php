@@ -8,7 +8,7 @@ class Qode_Quick_View_For_WooCommerce_Framework_Field_Textareahtml extends Qode_
 
 	public function render_field() {
 		?>
-		<textarea class="form-control qodef-field qodef--field-html" name="<?php echo esc_attr( $this->name ); ?>" rows="10"
+		<textarea class="form-control qodef-field qodef--field-html" <?php qode_quick_view_for_woocommerce_inline_attrs( $this->data_attrs ); ?> name="<?php echo esc_attr( $this->name ); ?>" rows="10"
 		<?php
 		if ( isset( $this->args['readonly'] ) ) {
 			echo ' readonly';

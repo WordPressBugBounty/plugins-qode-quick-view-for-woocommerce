@@ -2,36 +2,41 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: QODE Quick View for WooCommerce 1.0.4\n"
+"Project-Id-Version: QODE Quick View for WooCommerce 1.0.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/qode-quick-view-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-08-01T16:05:06+02:00\n"
+"POT-Creation-Date: 2024-10-14T14:05:32+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.5.0\n"
+"X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: qode-quick-view-for-woocommerce\n"
 
 #. Plugin Name of the plugin
+#: D:\projects\qi-woo\app\public\wp-content\plugins\qode-quick-view-for-woocommerce\class-qode-quick-view-for-woocommerce.php
 #: inc/quick-view/shortcodes/quick-view-button/class-qode-quick-view-for-woocommerce-quick-view-button-shortcode.php:33
 msgid "QODE Quick View for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: D:\projects\qi-woo\app\public\wp-content\plugins\qode-quick-view-for-woocommerce\class-qode-quick-view-for-woocommerce.php
 msgid "https://qodeinteractive.com/qode-quick-view-for-woocommerce/"
 msgstr ""
 
 #. Description of the plugin
+#: D:\projects\qi-woo\app\public\wp-content\plugins\qode-quick-view-for-woocommerce\class-qode-quick-view-for-woocommerce.php
 msgid "QODE Quick View for WooCommerce helps you boost conversions & sales by providing visitors with handy pop-up product previews on product list pages."
 msgstr ""
 
 #. Author of the plugin
+#: D:\projects\qi-woo\app\public\wp-content\plugins\qode-quick-view-for-woocommerce\class-qode-quick-view-for-woocommerce.php
 msgid "Qode Interactive"
 msgstr ""
 
 #. Author URI of the plugin
+#: D:\projects\qi-woo\app\public\wp-content\plugins\qode-quick-view-for-woocommerce\class-qode-quick-view-for-woocommerce.php
 msgid "https://qodeinteractive.com/"
 msgstr ""
 
@@ -59,13 +64,13 @@ msgstr ""
 msgid "WooCommerce plugin is required for QODE Quick View for WooCommerce plugin to work properly. Please install/activate it first."
 msgstr ""
 
-#: helpers/helper.php:301
+#: helpers/helper.php:313
 msgid "Please upload a valid SVG icon"
 msgstr ""
 
-#: helpers/helper.php:813
-#: helpers/helper.php:857
-#: helpers/helper.php:886
+#: helpers/helper.php:825
+#: helpers/helper.php:869
+#: helpers/helper.php:898
 #: inc/admin/inc/common/core/class-qode-quick-view-for-woocommerce-framework-options.php:149
 #: inc/admin/inc/fonts/helper.php:115
 #: assets/blocks/quick-view-button.js:437
@@ -73,125 +78,125 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: helpers/helper.php:900
+#: helpers/helper.php:912
 msgid "Same Window"
 msgstr ""
 
-#: helpers/helper.php:901
+#: helpers/helper.php:913
 msgid "New Window"
 msgstr ""
 
-#: helpers/helper.php:904
+#: helpers/helper.php:916
 msgid "Solid"
 msgstr ""
 
-#: helpers/helper.php:905
+#: helpers/helper.php:917
 msgid "Dashed"
 msgstr ""
 
-#: helpers/helper.php:906
+#: helpers/helper.php:918
 msgid "Dotted"
 msgstr ""
 
-#: helpers/helper.php:909
+#: helpers/helper.php:921
 msgid "Thin (100)"
 msgstr ""
 
-#: helpers/helper.php:910
+#: helpers/helper.php:922
 msgid "Extra Light (200)"
 msgstr ""
 
-#: helpers/helper.php:911
+#: helpers/helper.php:923
 msgid "Light (300)"
 msgstr ""
 
-#: helpers/helper.php:912
+#: helpers/helper.php:924
 msgid "Normal (400)"
 msgstr ""
 
-#: helpers/helper.php:913
+#: helpers/helper.php:925
 msgid "Medium (500)"
 msgstr ""
 
-#: helpers/helper.php:914
+#: helpers/helper.php:926
 msgid "Semi Bold (600)"
 msgstr ""
 
-#: helpers/helper.php:915
+#: helpers/helper.php:927
 msgid "Bold (700)"
 msgstr ""
 
-#: helpers/helper.php:916
+#: helpers/helper.php:928
 msgid "Extra Bold (800)"
 msgstr ""
 
-#: helpers/helper.php:917
+#: helpers/helper.php:929
 msgid "Black (900)"
 msgstr ""
 
-#: helpers/helper.php:920
+#: helpers/helper.php:932
 msgid "Normal"
 msgstr ""
 
-#: helpers/helper.php:921
+#: helpers/helper.php:933
 msgid "Italic"
 msgstr ""
 
-#: helpers/helper.php:922
+#: helpers/helper.php:934
 msgid "Oblique"
 msgstr ""
 
-#: helpers/helper.php:923
-#: helpers/helper.php:931
-#: helpers/helper.php:939
+#: helpers/helper.php:935
+#: helpers/helper.php:943
+#: helpers/helper.php:951
 msgid "Initial"
 msgstr ""
 
-#: helpers/helper.php:924
-#: helpers/helper.php:932
-#: helpers/helper.php:940
+#: helpers/helper.php:936
+#: helpers/helper.php:944
+#: helpers/helper.php:952
 msgid "Inherit"
 msgstr ""
 
-#: helpers/helper.php:927
-#: helpers/helper.php:935
+#: helpers/helper.php:939
+#: helpers/helper.php:947
 msgid "None"
 msgstr ""
 
-#: helpers/helper.php:928
+#: helpers/helper.php:940
 msgid "Capitalize"
 msgstr ""
 
-#: helpers/helper.php:929
+#: helpers/helper.php:941
 msgid "Uppercase"
 msgstr ""
 
-#: helpers/helper.php:930
+#: helpers/helper.php:942
 msgid "Lowercase"
 msgstr ""
 
-#: helpers/helper.php:936
+#: helpers/helper.php:948
 msgid "Underline"
 msgstr ""
 
-#: helpers/helper.php:937
+#: helpers/helper.php:949
 msgid "Overline"
 msgstr ""
 
-#: helpers/helper.php:938
+#: helpers/helper.php:950
 msgid "Line-Through"
 msgstr ""
 
-#: helpers/helper.php:943
-#: helpers/helper.php:948
+#: helpers/helper.php:955
+#: helpers/helper.php:960
 #: inc/admin/inc/common/fields-wp/class-qode-quick-view-for-woocommerce-framework-field-wp-yesno.php:13
 #: inc/admin/inc/common/fields/class-qode-quick-view-for-woocommerce-framework-field-yesno.php:13
 #: inc/admin/inc/shortcodes/translators/elementor/class-qode-quick-view-for-woocommerce-framework-elementor-translator.php:622
 msgid "Yes"
 msgstr ""
 
-#: helpers/helper.php:944
-#: helpers/helper.php:947
+#: helpers/helper.php:956
+#: helpers/helper.php:959
 #: inc/admin/inc/common/fields-wp/class-qode-quick-view-for-woocommerce-framework-field-wp-yesno.php:17
 #: inc/admin/inc/common/fields/class-qode-quick-view-for-woocommerce-framework-field-yesno.php:15
 #: inc/admin/inc/shortcodes/translators/elementor/class-qode-quick-view-for-woocommerce-framework-elementor-translator.php:621

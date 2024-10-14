@@ -18,7 +18,7 @@ class Qode_Quick_View_For_WooCommerce_Framework_Field_Color extends Qode_Quick_V
 	public function render_field() {
 		$has_placeholder = $this->args['placeholder'] ?? '';
 		?>
-		<input type="text" data-alpha-enabled="true" name="<?php echo esc_attr( $this->name ); ?>" value="<?php echo esc_attr( $this->params['value'] ); ?>" placeholder="<?php echo esc_attr( esc_html( $has_placeholder ) ); ?>" class="qodef-field qodef-color-field"/>
+		<input type="text" data-alpha-enabled="true" name="<?php echo esc_attr( $this->name ); ?>" value="<?php echo esc_attr( $this->params['value'] ); ?>" placeholder="<?php echo esc_attr( esc_html( $has_placeholder ) ); ?>" <?php qode_quick_view_for_woocommerce_inline_attrs( $this->data_attrs ); ?> class="qodef-field qodef-color-field"/>
 		<?php
 		if ( $has_placeholder ) {
 			?>

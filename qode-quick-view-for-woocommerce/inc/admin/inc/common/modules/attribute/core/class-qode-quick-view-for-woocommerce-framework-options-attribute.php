@@ -55,13 +55,14 @@ class Qode_Quick_View_For_WooCommerce_Framework_Options_Attribute extends Qode_Q
 		}
 
 		foreach ( $this->get_options() as $key => $value ) {
-			$value  = array_key_exists( $key, $_POST ) ? sanitize_text_field( wp_unslash( $_POST[ $key ] ) ) : '';
-			$option = $key . '-' . strval( $id );
+			$value = array_key_exists( $key, $_POST ) ? sanitize_text_field( wp_unslash( $_POST[ $key ] ) ) : '';
+
+			$qode_quick_view_for_woocommerce_option_name = $key . '_' . strval( $id );
 
 			if ( ( ! empty( $value ) || '0' === $value || 0 === $value ) && '' !== trim( $value ) ) {
-				update_option( $option, sanitize_text_field( wp_unslash( $value ) ) );
+				update_option( $qode_quick_view_for_woocommerce_option_name, sanitize_text_field( wp_unslash( $value ) ) );
 			} else {
-				delete_option( $option );
+				delete_option( $qode_quick_view_for_woocommerce_option_name );
 			}
 		}
 	}

@@ -114,7 +114,10 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_execute_templ
 			}
 
 			ob_start();
-			include( $template );
+
+			// nosemgrep audit.php.lang.security.file.inclusion-arg.
+			include $template;
+
 			$html = ob_get_clean();
 
 			return $html;
@@ -134,8 +137,7 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_svg_icon' ) )
 	function qode_quick_view_for_woocommerce_framework_svg_icon( $name, $class_name = '' ) {
 		$svg_template_part = qode_quick_view_for_woocommerce_framework_get_svg_icon( $name, $class_name );
 
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo qode_quick_view_for_woocommerce_framework_wp_kses_html( 'html', $svg_template_part );
+		echo wp_kses_post( $svg_template_part );
 	}
 }
 
@@ -243,6 +245,8 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_wp_kses_html'
 							'fill'         => true,
 							'fill-opacity' => true,
 							'transform'    => true,
+							'clip-path'    => true,
+							'mask'         => true,
 						),
 						'rect'     => array(
 							'x'            => true,
@@ -252,15 +256,11 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_wp_kses_html'
 							'stroke'       => true,
 							'stroke-width' => true,
 							'fill'         => true,
+							'fill-rule'    => true,
 							'fill-opacity' => true,
 							'transform'    => true,
 							'rx'           => true,
 							'ry'           => true,
-						),
-						'title'    => array(
-							'title' => true,
-							'class' => true,
-							'style' => true,
 						),
 						'path'     => array(
 							'd'            => true,
@@ -272,6 +272,8 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_wp_kses_html'
 							'pathlength'   => true,
 						),
 						'polygon'  => array(
+							'fill'      => true,
+							'fill-rule' => true,
 							'points'    => true,
 							'transform' => true,
 						),
@@ -280,6 +282,8 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_wp_kses_html'
 							'x2'           => true,
 							'y1'           => true,
 							'y2'           => true,
+							'fill'         => true,
+							'fill-rule'    => true,
 							'stroke'       => true,
 							'stroke-width' => true,
 							'transform'    => true,
@@ -312,12 +316,33 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_wp_kses_html'
 							'fill-opacity' => true,
 							'transform'    => true,
 						),
+						'title'    => array(
+							'title' => true,
+							'class' => true,
+							'style' => true,
+						),
 						'text'     => array(
 							'x'         => true,
 							'y'         => true,
 							'class'     => true,
 							'style'     => true,
 							'transform' => true,
+						),
+						'mask'     => array(
+							'id'        => true,
+							'fill'      => true,
+							'style'     => true,
+							'maskUnits' => true,
+							'x'         => true,
+							'y'         => true,
+							'width'     => true,
+							'height'    => true,
+						),
+						'defs'     => array(
+							'id' => true,
+						),
+						'clipPath' => array(
+							'id' => true,
 						),
 					)
 				);
@@ -408,6 +433,153 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_wp_kses_html'
 	}
 }
 
+if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_extend_wp_kses_allowed_html' ) ) {
+	/**
+	 * Function that extend an array of allowed HTML tags and attributes for a given context.
+	 *
+	 * @param array $allowedposttags
+	 * @param string|array $context The context for which to retrieve tags. Allowed values are 'post',
+	 *                               'strip', 'data', 'entities', or the name of a field filter such as
+	 *                               'pre_user_description', or an array of allowed HTML elements and attributes.
+	 *
+	 * @return array Array of allowed HTML tags and their allowed attributes.
+	 */
+	function qode_quick_view_for_woocommerce_framework_extend_wp_kses_allowed_html( $allowedposttags, $context ) {
+
+		if ( 'post' === $context ) {
+			$svg_atts = apply_filters(
+				'qode_quick_view_for_woocommerce_filter_framework_wp_kses_svg_atts',
+				array(
+					'svg'      => array(
+						'xmlns'             => true,
+						'version'           => true,
+						'id'                => true,
+						'class'             => true,
+						'x'                 => true,
+						'y'                 => true,
+						'aria-hidden'       => true,
+						'aria-labelledby'   => true,
+						'role'              => true,
+						'width'             => true,
+						'height'            => true,
+						'viewbox'           => true,
+						'enable-background' => true,
+						'focusable'         => true,
+						'data-prefix'       => true,
+						'data-icon'         => true,
+					),
+					'g'        => array(
+						'stroke'       => true,
+						'stroke-width' => true,
+						'fill'         => true,
+						'fill-opacity' => true,
+						'transform'    => true,
+						'clip-path'    => true,
+						'mask'         => true,
+					),
+					'rect'     => array(
+						'x'            => true,
+						'y'            => true,
+						'width'        => true,
+						'height'       => true,
+						'stroke'       => true,
+						'stroke-width' => true,
+						'fill'         => true,
+						'fill-rule'    => true,
+						'fill-opacity' => true,
+						'transform'    => true,
+						'rx'           => true,
+						'ry'           => true,
+					),
+					'path'     => array(
+						'd'            => true,
+						'stroke'       => true,
+						'stroke-width' => true,
+						'fill'         => true,
+						'fill-opacity' => true,
+						'transform'    => true,
+						'pathlength'   => true,
+					),
+					'polygon'  => array(
+						'fill'      => true,
+						'fill-rule' => true,
+						'points'    => true,
+						'transform' => true,
+					),
+					'line'     => array(
+						'x1'           => true,
+						'x2'           => true,
+						'y1'           => true,
+						'y2'           => true,
+						'fill'         => true,
+						'fill-rule'    => true,
+						'stroke'       => true,
+						'stroke-width' => true,
+						'transform'    => true,
+					),
+					'polyline' => array(
+						'points'    => true,
+						'stroke'    => true,
+						'fill'      => true,
+						'transform' => true,
+					),
+					'circle'   => array(
+						'cx'           => true,
+						'cy'           => true,
+						'r'            => true,
+						'stroke'       => true,
+						'stroke-width' => true,
+						'fill'         => true,
+						'fill-opacity' => true,
+						'transform'    => true,
+					),
+					'ellipse'  => array(
+						'class'        => true,
+						'cx'           => true,
+						'cy'           => true,
+						'rx'           => true,
+						'ry'           => true,
+						'stroke'       => true,
+						'stroke-width' => true,
+						'fill'         => true,
+						'fill-opacity' => true,
+						'transform'    => true,
+					),
+					'text'     => array(
+						'x'         => true,
+						'y'         => true,
+						'class'     => true,
+						'style'     => true,
+						'transform' => true,
+					),
+					'mask'     => array(
+						'id'        => true,
+						'fill'      => true,
+						'style'     => true,
+						'maskUnits' => true,
+						'x'         => true,
+						'y'         => true,
+						'width'     => true,
+						'height'    => true,
+					),
+					'defs'     => array(
+						'id' => true,
+					),
+					'clipPath' => array(
+						'id' => true,
+					),
+				)
+			);
+
+			$allowedposttags = array_merge( $allowedposttags, $svg_atts );
+		}
+
+		return $allowedposttags;
+	}
+
+	add_filter( 'wp_kses_allowed_html', 'qode_quick_view_for_woocommerce_framework_extend_wp_kses_allowed_html', 10, 2 );
+}
+
 if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_get_page_id' ) ) {
 	/**
 	 * Function that returns current page id
@@ -485,7 +657,7 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_get_option_va
 			// phpcs:ignore WordPress.Security.NonceVerification
 			$id = isset( $_GET['edit'] ) ? intval( $_GET['edit'] ) : 0;
 			if ( ! empty( $id ) ) {
-				$name  = $name . '-' . strval( $id );
+				$name  = $name . '_' . strval( $id );
 				$value = get_option( $name );
 			}
 		}

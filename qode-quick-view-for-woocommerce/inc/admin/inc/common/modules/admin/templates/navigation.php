@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 $cpt_pages = apply_filters( 'qode_quick_view_for_woocommerce_filter_admin_pages_cpt', array() );
+$tax_pages = apply_filters( 'qode_quick_view_for_woocommerce_filter_admin_pages_tax', array() );
 ?>
 <div class="qodef-tabs-navigation-wrapper">
 	<div class="qodef-tabs-navigation-wrapper-inner">
@@ -67,6 +68,26 @@ $cpt_pages = apply_filters( 'qode_quick_view_for_woocommerce_filter_admin_pages_
 							?>
 							<li class="nav-item <?php echo esc_attr( $active_class ); ?>">
 								<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=' . $cpt ) ); ?>">
+									<span class="nav-link">
+										<?php echo esc_html( $name ); ?>
+									</span>
+								</a>
+							</li>
+							<?php
+						}
+					}
+
+					if ( is_array( $tax_pages ) && count( $tax_pages ) ) {
+						foreach ( $tax_pages as $tax_page => $name ) {
+							$this_taxonomy = get_current_screen()->taxonomy;
+							$active_class  = '';
+
+							if ( ! empty( $this_taxonomy ) && $this_taxonomy === $tax_page ) {
+								$active_class = 'qodef-active';
+							}
+							?>
+							<li class="nav-item <?php echo esc_attr( $active_class ); ?>">
+								<a href="<?php echo esc_url( admin_url( 'edit-tags.php?taxonomy=' . $tax_page ) ); ?>">
 									<span class="nav-link">
 										<?php echo esc_html( $name ); ?>
 									</span>

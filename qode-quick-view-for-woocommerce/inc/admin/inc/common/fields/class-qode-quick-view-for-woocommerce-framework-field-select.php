@@ -24,7 +24,7 @@ class Qode_Quick_View_For_WooCommerce_Framework_Field_Select extends Qode_Quick_
 	public function render_field() {
 		$field_name = ! empty( $this->params['multiple'] ) ? $this->name . '[]' : $this->name;
 		?>
-		<select class="<?php echo esc_attr( $this->params['select_class'] ); ?> qodef-field" name="<?php echo esc_attr( $field_name ); ?>" data-option-name="<?php echo esc_attr( $this->name ); ?>" data-option-type="selectbox" <?php echo esc_attr( $this->params['multiple'] ); ?>>
+		<select class="<?php echo esc_attr( $this->params['select_class'] ); ?> qodef-field" <?php qode_quick_view_for_woocommerce_inline_attrs( $this->data_attrs ); ?> name="<?php echo esc_attr( $field_name ); ?>" data-option-name="<?php echo esc_attr( $this->name ); ?>" data-option-type="selectbox" <?php echo esc_attr( $this->params['multiple'] ); ?>>
 			<?php
 			foreach ( $this->options as $key => $label ) {
 				if ( '-1' === $key ) {
