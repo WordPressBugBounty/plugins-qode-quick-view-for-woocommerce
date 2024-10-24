@@ -1,6 +1,9 @@
 *** QODE Quick View for WooCommerce Changelog ***
 
 2024-10-24 - version 1.1
+* Fixed undefined constants
+
+2024-10-24 - version 1.1
 * Improved WordPress coding standards
 * Minor fixes
 

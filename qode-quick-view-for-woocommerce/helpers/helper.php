@@ -102,7 +102,7 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_get_template_part' ) ) 
 		$module   = qode_quick_view_for_woocommerce_sanitize_module_template_part( $module );
 		$template = qode_quick_view_for_woocommerce_sanitize_module_template_part( $template );
 
-		$temp = QI_WOO_INC_PATH . '/' . $module . '/' . $template;
+		$temp = QODE_QUICK_VIEW_FOR_WOOCOMMERCE_INC_PATH . '/' . $module . '/' . $template;
 
 		$template = qode_quick_view_for_woocommerce_get_template_with_slug( $temp, $slug );
 
