@@ -36,33 +36,6 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_is_installed' ) ) {
 	}
 }
 
-if ( ! function_exists( 'qode_quick_view_for_woocommerce_execute_template_with_params' ) ) {
-	/**
-	 * Loads module template part.
-	 *
-	 * @param string $template path to template that is going to be included
-	 * @param array $params params that are passed to template
-	 *
-	 * @return string - template html
-	 */
-	function qode_quick_view_for_woocommerce_execute_template_with_params( $template, $params ) {
-		if ( ! empty( $template ) && file_exists( $template ) ) {
-			// Extract params so they could be used in template.
-			if ( is_array( $params ) && count( $params ) ) {
-				extract( $params, EXTR_SKIP ); // @codingStandardsIgnoreLine
-			}
-
-			ob_start();
-			include $template;
-			$html = ob_get_clean();
-
-			return $html;
-		} else {
-			return '';
-		}
-	}
-}
-
 if ( ! function_exists( 'qode_quick_view_for_woocommerce_sanitize_module_template_part' ) ) {
 	/**
 	 * Sanitize module template part.
@@ -129,11 +102,28 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_get_template_part' ) ) 
 		$module   = qode_quick_view_for_woocommerce_sanitize_module_template_part( $module );
 		$template = qode_quick_view_for_woocommerce_sanitize_module_template_part( $template );
 
-		$temp = QODE_QUICK_VIEW_FOR_WOOCOMMERCE_INC_PATH . '/' . $module . '/' . $template;
+		$temp = QI_WOO_INC_PATH . '/' . $module . '/' . $template;
 
 		$template = qode_quick_view_for_woocommerce_get_template_with_slug( $temp, $slug );
 
-		return qode_quick_view_for_woocommerce_execute_template_with_params( $template, $params );
+		if ( ! empty( $template ) && file_exists( $template ) ) {
+			// Extract params so they could be used in template.
+			if ( is_array( $params ) && count( $params ) ) {
+				// phpcs:ignore WordPress.PHP.DontExtract.extract_extract
+				extract( $params, EXTR_SKIP ); // @codingStandardsIgnoreLine
+			}
+
+			ob_start();
+
+			// nosemgrep audit.php.lang.security.file.inclusion-arg.
+			include qode_quick_view_for_woocommerce_get_template_with_slug( $temp, $slug );
+
+			$html = ob_get_clean();
+
+			return $html;
+		} else {
+			return '';
+		}
 	}
 }
 
@@ -147,8 +137,10 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_template_part' ) ) {
 	 * @param array $params array of parameters to pass to template
 	 */
 	function qode_quick_view_for_woocommerce_template_part( $module, $template, $slug = '', $params = array() ) {
+		$module_template_part = qode_quick_view_for_woocommerce_get_template_part( $module, $template, $slug, $params );
+
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo qode_quick_view_for_woocommerce_get_template_part( $module, $template, $slug, $params );
+		echo qode_quick_view_for_woocommerce_framework_wp_kses_html( 'html', $module_template_part );
 	}
 }
 
@@ -194,8 +186,10 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_render_svg_icon' ) ) {
 	 * @param string $class_name - custom html tag class name
 	 */
 	function qode_quick_view_for_woocommerce_render_svg_icon( $name, $class_name = '' ) {
+		$svg_template_part = qode_quick_view_for_woocommerce_get_svg_icon( $name, $class_name );
+
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo qode_quick_view_for_woocommerce_get_svg_icon( $name, $class_name );
+		echo qode_quick_view_for_woocommerce_framework_wp_kses_html( 'html', $svg_template_part );
 	}
 }
 
@@ -329,8 +323,7 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_class_attribute' ) ) {
 	 * @see qode_quick_view_for_woocommerce_get_class_attribute()
 	 */
 	function qode_quick_view_for_woocommerce_class_attribute( $value ) {
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo qode_quick_view_for_woocommerce_get_class_attribute( $value );
+		echo wp_kses_post( qode_quick_view_for_woocommerce_get_class_attribute( $value ) );
 	}
 }
 
@@ -358,8 +351,7 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_id_attribute' ) ) {
 	 * @see qode_quick_view_for_woocommerce_get_id_attribute()
 	 */
 	function qode_quick_view_for_woocommerce_id_attribute( $value ) {
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo qode_quick_view_for_woocommerce_get_id_attribute( $value );
+		echo wp_kses_post( qode_quick_view_for_woocommerce_get_id_attribute( $value ) );
 	}
 }
 
@@ -387,8 +379,10 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_inline_style' ) ) {
 	 * @see qode_quick_view_for_woocommerce_get_inline_style()
 	 */
 	function qode_quick_view_for_woocommerce_inline_style( $value ) {
+		$inline_style_part = qode_quick_view_for_woocommerce_get_inline_style( $value );
+
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo qode_quick_view_for_woocommerce_get_inline_style( $value );
+		echo qode_quick_view_for_woocommerce_framework_wp_kses_html( 'attributes', $inline_style_part );
 	}
 }
 
@@ -415,8 +409,10 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_inline_attrs' ) ) {
 	 * @param bool $allow_zero_values
 	 */
 	function qode_quick_view_for_woocommerce_inline_attrs( $attrs, $allow_zero_values = false ) {
+		$inline_attrs_part = qode_quick_view_for_woocommerce_get_inline_attrs( $attrs, $allow_zero_values );
+
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo qode_quick_view_for_woocommerce_get_inline_attrs( $attrs, $allow_zero_values );
+		echo qode_quick_view_for_woocommerce_framework_wp_kses_html( 'attributes', $inline_attrs_part );
 	}
 }
 
@@ -619,191 +615,6 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_dynamic_style_responsiv
 		}
 
 		return $output;
-	}
-}
-
-if ( ! function_exists( 'qode_quick_view_for_woocommerce_get_attachment_id_from_url' ) ) {
-	/**
-	 * Function that retrieves attachment id for passed attachment url
-	 *
-	 * @param string $attachment_url
-	 *
-	 * @return null|string
-	 */
-	function qode_quick_view_for_woocommerce_get_attachment_id_from_url( $attachment_url ) {
-		global $wpdb;
-		$attachment_id = '';
-
-		if ( '' !== $attachment_url ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery
-			$attachment_id = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE guid=%s", $attachment_url ) );
-
-			// Additional check for undefined reason when guid is not image src.
-			if ( empty( $attachment_id ) ) {
-				$modified_url = substr( $attachment_url, strrpos( $attachment_url, '/' ) + 1 );
-
-				// Get attachment id.
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery
-				$attachment_id = $wpdb->get_var( $wpdb->prepare( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_wp_attached_file' AND meta_value LIKE %s", '%' . $modified_url . '%' ) );
-			}
-		}
-
-		return $attachment_id;
-	}
-}
-
-if ( ! function_exists( 'qode_quick_view_for_woocommerce_resize_image' ) ) {
-	/**
-	 * Function that generates custom thumbnail for given attachment
-	 *
-	 * @param int|string $attachment - attachment id or url of image to resize
-	 * @param int $width desired - height of custom thumbnail
-	 * @param int $height desired - width of custom thumbnail
-	 * @param bool $crop - whether to crop image or not
-	 *
-	 * @return array returns array containing img_url, width and height
-	 *
-	 * @see qode_quick_view_for_woocommerce_get_attachment_id_from_url()
-	 * @see get_attached_file()
-	 * @see wp_get_attachment_url()
-	 * @see wp_get_image_editor()
-	 */
-	function qode_quick_view_for_woocommerce_resize_image( $attachment, $width = null, $height = null, $crop = true ) {
-		$return_array = array();
-
-		if ( ! empty( $attachment ) ) {
-			if ( is_int( $attachment ) ) {
-				$attachment_id = $attachment;
-			} elseif ( is_numeric( $attachment ) ) {
-				$attachment_id = absint( $attachment );
-			} else {
-				$attachment_id = qode_quick_view_for_woocommerce_get_attachment_id_from_url( $attachment );
-			}
-
-			if ( ! empty( $attachment_id ) && ( isset( $width ) && isset( $height ) ) ) {
-
-				// Get file path of the attachment.
-				$img_path = get_attached_file( $attachment_id );
-
-				// Get attachment url.
-				$img_url = wp_get_attachment_url( $attachment_id );
-
-				// Break down img path to array, so we can use its components in building thumbnail path.
-				$img_path_array = pathinfo( $img_path );
-
-				// Build thumbnail path.
-				$new_img_path = $img_path_array['dirname'] . '/' . $img_path_array['filename'] . '-' . $width . 'x' . $height . '.' . $img_path_array['extension'];
-
-				// Build thumbnail url.
-				$new_img_url = str_replace( $img_path_array['filename'], $img_path_array['filename'] . '-' . $width . 'x' . $height, $img_url );
-
-				// Check if thumbnail exists by its path.
-				if ( ! file_exists( $new_img_path ) ) {
-					// Get image manipulation object.
-					$image_object = wp_get_image_editor( $img_path );
-
-					if ( ! is_wp_error( $image_object ) ) {
-						// Resize image and save it new to path.
-						$image_object->resize( $width, $height, $crop );
-						$image_object->save( $new_img_path );
-
-						// Get sizes of newly created thumbnail.
-						// We don't use $width and $height because those might differ from end result based on $crop parameter.
-						$image_sizes = $image_object->get_size();
-
-						$width  = $image_sizes['width'];
-						$height = $image_sizes['height'];
-					}
-				}
-
-				// Generate data to be returned.
-				$return_array = array(
-					'img_url'    => $new_img_url,
-					'img_width'  => $width,
-					'img_height' => $height,
-				);
-
-				// Attachment wasn't found in gallery, but it is not empty.
-			} elseif ( '' !== $attachment && ( isset( $width ) && isset( $height ) ) ) {
-				// Generate data to be returned.
-				$return_array = array(
-					'img_url'    => $attachment,
-					'img_width'  => $width,
-					'img_height' => $height,
-				);
-			}
-		}
-
-		return $return_array;
-	}
-}
-
-if ( ! function_exists( 'qode_quick_view_for_woocommerce_generate_thumbnail' ) ) {
-	/**
-	 * Generates thumbnail img tag. It calls qode_quick_view_for_woocommerce_resize_image function for resizing image
-	 *
-	 * @param int|string $attachment - attachment id or url to generate thumbnail from
-	 * @param int $width - width of thumbnail
-	 * @param int $height - height of thumbnail
-	 * @param bool $crop - whether to crop thumbnail or not
-	 *
-	 * @return string generated img tag
-	 *
-	 * @see qode_quick_view_for_woocommerce_resize_image()
-	 * @see qode_quick_view_for_woocommerce_get_attachment_id_from_url()
-	 */
-	function qode_quick_view_for_woocommerce_generate_thumbnail( $attachment, $width = null, $height = null, $crop = true ) {
-		if ( ! empty( $attachment ) ) {
-			if ( is_int( $attachment ) ) {
-				$attachment_id = $attachment;
-			} elseif ( is_numeric( $attachment ) ) {
-				$attachment_id = absint( $attachment );
-			} else {
-				$attachment_id = qode_quick_view_for_woocommerce_get_attachment_id_from_url( $attachment );
-			}
-			$img_info = qode_quick_view_for_woocommerce_resize_image( $attachment_id, $width, $height, $crop );
-			$img_alt  = ! empty( $attachment_id ) ? get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) : '';
-
-			if ( is_array( $img_info ) && count( $img_info ) ) {
-				$url            = esc_url( $img_info['img_url'] );
-				$attr           = array();
-				$attr['alt']    = esc_attr( $img_alt );
-				$attr['width']  = esc_attr( $img_info['img_width'] );
-				$attr['height'] = esc_attr( $img_info['img_height'] );
-
-				return qode_quick_view_for_woocommerce_get_image_html_from_src( $url, $attr );
-			}
-		}
-
-		return '';
-	}
-}
-
-if ( ! function_exists( 'qode_quick_view_for_woocommerce_get_image_html_from_src' ) ) {
-	/**
-	 * Function that returns image tag from url and it's attributes.
-	 *
-	 * @param string $url
-	 * @param array $attr
-	 *
-	 * @return string
-	 */
-	function qode_quick_view_for_woocommerce_get_image_html_from_src( $url, $attr = array() ) {
-		$html = '';
-
-		if ( ! empty( $url ) ) {
-			$html .= '<img src="' . esc_url( $url ) . '"';
-
-			if ( ! empty( $attr ) ) {
-				foreach ( $attr as $name => $value ) {
-					$html .= ' ' . $name . '="' . $value . '"';
-				}
-			}
-
-			$html .= ' />';
-		}
-
-		return $html;
 	}
 }
 
@@ -1096,69 +907,11 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_get_button_classes' ) )
 		$classes = array(
 			'button',
 		);
+
 		if ( function_exists( 'wc_wp_theme_get_element_class_name' ) ) {
 			$classes[] = wc_wp_theme_get_element_class_name( 'button' );
 		}
+
 		return implode( ' ', array_merge( $classes, $additional_classes ) );
-	}
-}
-
-if ( ! function_exists( 'qode_quick_view_for_woocommerce_is_woo_page' ) ) {
-	/**
-	 * Function that check WooCommerce pages
-	 *
-	 * @param string $page
-	 *
-	 * @return bool
-	 */
-	function qode_quick_view_for_woocommerce_is_woo_page( $page ) {
-		switch ( $page ) {
-			case 'shop':
-				return function_exists( 'is_shop' ) && is_shop();
-			case 'single':
-				return is_singular( 'product' );
-			case 'cart':
-				return function_exists( 'is_cart' ) && is_cart();
-			case 'checkout':
-				return function_exists( 'is_checkout' ) && is_checkout();
-			case 'account':
-				return function_exists( 'is_account_page' ) && is_account_page();
-			case 'category':
-				return function_exists( 'is_product_category' ) && is_product_category();
-			case 'tag':
-				return function_exists( 'is_product_tag' ) && is_product_tag();
-			case 'any':
-				return (
-					function_exists( 'is_shop' ) && is_shop() ||
-					is_singular( 'product' ) ||
-					function_exists( 'is_cart' ) && is_cart() ||
-					function_exists( 'is_checkout' ) && is_checkout() ||
-					function_exists( 'is_account_page' ) && is_account_page() ||
-					function_exists( 'is_product_category' ) && is_product_category() ||
-					function_exists( 'is_product_tag' ) && is_product_tag()
-				);
-			case 'archive':
-				return ( function_exists( 'is_shop' ) && is_shop() ) || ( function_exists( 'is_product_category' ) && is_product_category() ) || ( function_exists( 'is_product_tag' ) && is_product_tag() );
-			default:
-				return false;
-		}
-	}
-}
-
-if ( ! function_exists( 'qode_quick_view_for_woocommerce_get_main_shop_page_id' ) ) {
-	/**
-	 * Function that return main shop page ID
-	 *
-	 * @return int
-	 */
-	function qode_quick_view_for_woocommerce_get_main_shop_page_id() {
-		// Get page id from options table.
-		$shop_id = get_option( 'woocommerce_shop_page_id' );
-
-		if ( ! empty( $shop_id ) ) {
-			return $shop_id;
-		}
-
-		return false;
 	}
 }

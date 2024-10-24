@@ -5,9 +5,11 @@ Description: QODE Quick View for WooCommerce helps you boost conversions & sales
 Author: Qode Interactive
 Author URI: https://qodeinteractive.com/
 Plugin URI: https://qodeinteractive.com/qode-quick-view-for-woocommerce/
-Version: 1.0.6
+Version: 1.1
 Requires at least: 6.3
 Requires PHP: 7.4
+WC requires at least: 7.6
+WC tested up to: 9.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: qode-quick-view-for-woocommerce
@@ -48,6 +50,9 @@ if ( ! class_exists( 'Qode_Quick_View_For_WooCommerce' ) ) {
 				// permission 12 is set in order to have the highest priority.
 				add_action( 'wp_enqueue_scripts', array( $this, 'add_inline_style' ), 12 );
 				add_action( 'wp_enqueue_scripts', array( $this, 'localize_scripts' ) );
+
+				// Set WooCommerce features.
+				add_action( 'before_woocommerce_init', array( $this, 'declare_wc_features_support' ) );
 
 				// Include plugin's modules.
 				$this->include_modules();
@@ -123,6 +128,12 @@ if ( ! class_exists( 'Qode_Quick_View_For_WooCommerce' ) ) {
 			);
 		}
 
+		public function declare_wc_features_support() {
+			if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', QODE_QUICK_VIEW_FOR_WOOCOMMERCE_PLUGIN_BASE_FILE, true );
+			}
+		}
+
 		public function include_modules() {
 			// Hook to include additional element before modules inclusion.
 			do_action( 'qode_quick_view_for_woocommerce_action_before_include_modules' );
@@ -192,24 +203,4 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_admin_notice_content' )
 	function qode_quick_view_for_woocommerce_admin_notice_content() {
 		printf( '<div class="notice notice-error"><p>%s</p></div>', esc_html__( 'WooCommerce plugin is required for QODE Quick View for WooCommerce plugin to work properly. Please install/activate it first.', 'qode-quick-view-for-woocommerce' ) );
 	}
-}
-
-if ( ! function_exists( 'qode_quick_view_for_woocommerce_update_active_plugins_list' ) ) {
-	/**
-	 * Function that return theme and plugin classes for button elements
-	 *
-	 * @return void
-	 */
-	function qode_quick_view_for_woocommerce_update_active_plugins_list() {
-		$list = get_option( 'qode_addons_for_woocommerce_active_plugins', array() );
-
-		$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . plugin_basename( __FILE__ ) );
-
-		$list[ $plugin_data['TextDomain'] ]['name']   = $plugin_data['Name'];
-		$list[ $plugin_data['TextDomain'] ]['status'] = 'free';
-
-		update_option( 'qode_addons_for_woocommerce_active_plugins', $list );
-	}
-
-	add_action( 'qode_quick_view_for_woocommerce_action_on_activation', 'qode_quick_view_for_woocommerce_update_active_plugins_list' );
 }

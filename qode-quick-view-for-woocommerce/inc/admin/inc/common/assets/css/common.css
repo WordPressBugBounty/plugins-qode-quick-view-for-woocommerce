@@ -2167,10 +2167,13 @@
 	flex-direction: column;
 }
 
-[class*=qodef-page-v4].qodef-options-admin .qodef-field-holder.qodef-full-info .qodef-field-section > *, [class*=qodef-page-v4].qodef-options-meta .qodef-field-holder.qodef-full-info .qodef-field-section > *, [class*=qodef-page-v4].qodef-options-front-end .qodef-field-holder.qodef-full-info .qodef-field-section > * {
-	flex: auto;
-	padding: 0 !important;
-	width: 100% !important;
+[class*=qodef-page-v4].qodef-options-admin .qodef-field-holder.qodef-full-info .qodef-field-section > .qodef-field-desc, [class*=qodef-page-v4].qodef-options-meta .qodef-field-holder.qodef-full-info .qodef-field-section > .qodef-field-desc, [class*=qodef-page-v4].qodef-options-front-end .qodef-field-holder.qodef-full-info .qodef-field-section > .qodef-field-desc {
+	width: clamp(180px, 700px, 100%);
+}
+
+[class*=qodef-page-v4].qodef-options-admin .qodef-field-holder.qodef-full-info .qodef-field-section > .qodef-field-content:has(textarea), [class*=qodef-page-v4].qodef-options-meta .qodef-field-holder.qodef-full-info .qodef-field-section > .qodef-field-content:has(textarea), [class*=qodef-page-v4].qodef-options-front-end .qodef-field-holder.qodef-full-info .qodef-field-section > .qodef-field-content:has(textarea) {
+	width: clamp(120px, 700px, 100%);
+	min-width: clamp(120px, 700px, 100%);
 }
 
 [class*=qodef-page-v4].qodef-options-admin .qodef-field-section, [class*=qodef-page-v4].qodef-options-meta .qodef-field-section, [class*=qodef-page-v4].qodef-options-front-end .qodef-field-section {
@@ -2500,13 +2503,29 @@
 
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: space-between;
-	margin: -1px 0 0 0;
+	margin: 15px 0 0 0;
 	border: 1px solid #e7e7e7;
 	border-radius: 4px;
 	background-color: #fff;
 	overflow: hidden;
+}
+
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-fields-label, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-fields-label, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-fields-label {
+	display: none;
+	width: 100%;
+	align-self: center;
+	padding: 22px 24px;
+	margin: 0;
+}
+
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder.qodef--closed .qodef-repeater-fields-label, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder.qodef--closed .qodef-repeater-fields-label, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder.qodef--closed .qodef-repeater-fields-label {
+	display: block;
+}
+
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder:first-child, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder:first-child, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder:first-child {
+	margin-top: 0;
 }
 
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder:last-of-type, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder:last-of-type, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder:last-of-type {
@@ -2554,15 +2573,22 @@
 }
 
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-actions-holder, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-actions-holder, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-actions-holder {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 	flex: 0 0 90px;
 	text-align: center;
+	padding: 20px 0;
 }
 
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort,
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle,
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort,
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort,
+[class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle,
 [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort,
 [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort,
+[class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle,
 [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort,
 [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove {
 	width: 40px;
@@ -2570,26 +2596,61 @@
 	line-height: 20px;
 	margin: 0 0 0 auto;
 	text-align: center;
+	color: #b7b7b7;
+	transition: color .2s ease-out;
+}
+
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort:hover,
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle:hover,
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort:hover,
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove:hover, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort:hover,
+[class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle:hover,
+[class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort:hover,
+[class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove:hover, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort:hover,
+[class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle:hover,
+[class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort:hover,
+[class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove:hover {
+	color: #000000;
 }
 
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort a,
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle a,
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort a,
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort a,
+[class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle a,
 [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort a,
 [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort a,
+[class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle a,
 [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort a,
 [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a {
 	display: inline-block;
 	width: 100%;
 	height: 100%;
 	vertical-align: middle;
+	color: currentColor;
+}
+
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort a:hover,
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle a:hover,
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort a:hover,
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a:hover, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort a:hover,
+[class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle a:hover,
+[class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort a:hover,
+[class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a:hover, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort a:hover,
+[class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle a:hover,
+[class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort a:hover,
+[class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a:hover {
+	color: currentColor;
 }
 
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort svg,
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle svg,
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort svg,
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove svg, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort svg,
+[class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle svg,
 [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort svg,
 [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove svg, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort svg,
+[class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle svg,
 [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort svg,
 [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove svg {
 	display: inline-block;
@@ -2602,27 +2663,16 @@
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort,
 [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort,
 [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort {
-	color: #b7b7b7;
-	margin-bottom: 10px;
 	cursor: grab;
 }
 
-[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort:hover,
-[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort:hover, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort:hover,
-[class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort:hover, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-sort:hover,
-[class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-inner-sort:hover {
-	color: #000000;
-}
-
-[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a {
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle a,
+[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle a,
+[class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-toggle a,
+[class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a {
 	cursor: pointer;
-	color: #b7b7b7;
 	box-shadow: none;
 	text-decoration: none;
-}
-
-[class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a:hover, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a:hover, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-fields-holder .qodef-repeater-remove a:hover {
-	color: #000000;
 }
 
 [class*=qodef-page-v4].qodef-options-admin .qodef-repeater-wrapper .qodef-repeater-add, [class*=qodef-page-v4].qodef-options-meta .qodef-repeater-wrapper .qodef-repeater-add, [class*=qodef-page-v4].qodef-options-front-end .qodef-repeater-wrapper .qodef-repeater-add {
@@ -3368,6 +3418,12 @@
 
 [class*=qodef-page-v4].qodef-options-meta {
 	padding: 30px 30px 25px;
+	/* Field in page or section directly */
+}
+
+[class*=qodef-page-v4].qodef-options-meta .qodef-field-section .qodef-field-content:has(textarea) {
+	width: clamp(120px, 700px, 100%);
+	min-width: clamp(120px, 700px, 100%);
 }
 
 [class*=qodef-page-v4] .qodef-form-field:has(.qodef-options-heading) td {
@@ -4179,6 +4235,7 @@ body.wp-admin.rtl .ui-datepicker {
 	overflow: hidden !important;
 	white-space: nowrap !important;
 	clip: rect(0 0 0 0) !important;
+	-webkit-clip-path: inset(50%) !important;
 	clip-path: inset(50%) !important;
 }
 

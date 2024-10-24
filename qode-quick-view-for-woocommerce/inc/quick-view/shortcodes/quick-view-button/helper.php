@@ -36,6 +36,7 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_add_rest_api_quick_view
 
 		return $global_par;
 	}
+
 	add_filter( 'qode_quick_view_for_woocommerce_filter_rest_api_global_variables', 'qode_quick_view_for_woocommerce_add_rest_api_quick_view_button_global_variables', 10, 2 );
 }
 
@@ -88,6 +89,7 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_button_callback' ) ) {
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['security_token'] ) ), 'wp_rest' ) ) {
 				qode_quick_view_for_woocommerce_get_ajax_status( 'error', esc_html__( 'You are not authorized.', 'qode-quick-view-for-woocommerce' ) );
+				wp_die( esc_html__( 'You are not authorized.', 'qode-quick-view-for-woocommerce' ) );
 			}
 
 			$error             = false;

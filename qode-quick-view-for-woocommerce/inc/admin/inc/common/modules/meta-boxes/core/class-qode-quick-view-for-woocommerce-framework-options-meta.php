@@ -5,19 +5,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Qode_Quick_View_For_WooCommerce_Framework_Options_Meta extends Qode_Quick_View_For_WooCommerce_Framework_Options {
+	private $has_meta_box;
 
 	public function __construct() {
 		parent::__construct();
 
-		add_action( 'wp_loaded', array( $this, 'populate_meta_box' ) );
-		add_action( 'add_meta_boxes', array( $this, 'meta_box_register' ) );
-		add_action( 'do_meta_boxes', array( $this, 'remove_default_custom_fields' ) );
-		add_action( 'save_post', array( $this, 'meta_box_save' ), 1, 2 );
-		add_filter( 'sanitize_post_meta_qode_quick_view_for_woocommerce_meta_option', array( $this, 'sanitize_meta_option' ) );
-		// 5 is set to be same permission as Gutenberg plugin have.
-		add_action( 'admin_head', array( $this, 'enqueue_framework_meta_scripts' ), 5 );
+		$this->set_has_meta_box( apply_filters( 'qode_quick_view_for_woocommerce_filter_has_meta_box_options', false ) );
 
-		add_filter( 'admin_body_class', array( $this, 'add_admin_body_classes' ) );
+		if ( $this->get_has_meta_box() ) {
+			add_action( 'wp_loaded', array( $this, 'populate_meta_box' ) );
+			add_action( 'add_meta_boxes', array( $this, 'meta_box_register' ) );
+			add_action( 'do_meta_boxes', array( $this, 'remove_default_custom_fields' ) );
+			add_action( 'save_post', array( $this, 'meta_box_save' ), 1, 2 );
+			add_filter( 'sanitize_post_meta_qode_quick_view_for_woocommerce_meta_option', array( $this, 'sanitize_meta_option' ) );
+			// 5 is set to be same permission as Gutenberg plugin have.
+			add_action( 'admin_head', array( $this, 'enqueue_framework_meta_scripts' ), 5 );
+
+			add_filter( 'admin_body_class', array( $this, 'add_admin_body_classes' ) );
+		}
+	}
+
+	public function get_has_meta_box() {
+		return $this->has_meta_box;
+	}
+
+	public function set_has_meta_box( $has_meta_box ): void {
+		$this->has_meta_box = (bool) $has_meta_box;
 	}
 
 	public function populate_meta_box() {

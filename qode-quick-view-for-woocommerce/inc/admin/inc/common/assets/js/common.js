@@ -1,13 +1,13 @@
 (function ( $ ) {
 	'use strict';
 
-	if ( typeof qodefFramework !== 'object' ) {
-		window.qodefFramework = {};
+	if ( typeof qodefWooFramework !== 'object' ) {
+		window.qodefWooFramework = {};
 	}
 
-	qodefFramework.scroll       = 0;
-	qodefFramework.windowWidth  = $( window ).width();
-	qodefFramework.windowHeight = $( window ).height();
+	qodefWooFramework.scroll       = 0;
+	qodefWooFramework.windowWidth  = $( window ).width();
+	qodefWooFramework.windowHeight = $( window ).height();
 
 	$( document ).ready(
 		function () {
@@ -45,16 +45,16 @@
 
 	$( window ).scroll(
 		function () {
-			qodefFramework.scroll = $( window ).scrollTop();
+			qodefWooFramework.scroll = $( window ).scrollTop();
 		}
 	);
 
 	$( window ).resize(
 		function () {
-			qodefFramework.windowWidth  = $( window ).width();
-			qodefFramework.windowHeight = $( window ).height();
+			qodefWooFramework.windowWidth  = $( window ).width();
+			qodefWooFramework.windowHeight = $( window ).height();
 
-			if ( qodefFramework.windowWidth > 600 &&
+			if ( qodefWooFramework.windowWidth > 600 &&
 				typeof qodefAdminOptionsPanel.adminPage !== 'undefined' &&
 				qodefAdminOptionsPanel.adminPage.length &&
 				typeof qodefAdminOptionsPanel.adminHeader !== 'undefined' &&
@@ -113,7 +113,7 @@
 					function () {
 						qodefTabs.initTabs( $mainHolder, $( this ) );
 						var $tabsWrapper = $( this ).find( '.qodef-tab-item-nav-wrapper' );
-						qodefFramework.qodefPerfectScrollbar.init( $tabsWrapper, false );
+						qodefWooFramework.qodefPerfectScrollbar.init( $tabsWrapper, false );
 						qodefTabs.initTabsDrag( $tabsWrapper );
 					}
 				);
@@ -141,8 +141,8 @@
 				{
 					activate: function () {
 						// This peace of code is required in order to re init maps for address field type when it's inside tabs layout.
-						if ( typeof qodefFramework.qodefAddressFields === 'object' ) {
-							qodefFramework.qodefAddressFields.init( $mainHolder, true );
+						if ( typeof qodefWooFramework.qodefAddressFields === 'object' ) {
+							qodefWooFramework.qodefAddressFields.init( $mainHolder, true );
 						}
 
 						$( document.body ).trigger( 'qode_quick_view_for_woocommerce_trigger_tab_change' );
@@ -605,7 +605,7 @@
 		},
 	};
 
-	qodefFramework.qodefDependency = qodefDependency;
+	qodefWooFramework.qodefDependency = qodefDependency;
 
 	var qodefRepeater = {
 		init: function ( $mainHolder ) {
@@ -620,6 +620,7 @@
 					function () {
 						var $thisHolder = $( this );
 						qodefRepeater.qodefAddNewRow( $thisHolder, $mainHolder );
+						qodefRepeater.qodefToggleRow( $thisHolder );
 						qodefRepeater.qodefRemoveRow( $thisHolder );
 						qodefRepeater.qodefInitSortable( $thisHolder );
 					}
@@ -634,6 +635,7 @@
 					function () {
 						var $thisHolder = $( this );
 						qodefRepeater.qodefAddNewRowInner( $thisHolder, $mainHolder );
+						qodefRepeater.qodefToggleRowInner( $thisHolder );
 						qodefRepeater.qodefRemoveRowInner( $thisHolder );
 						qodefRepeater.qodefInitSortableInner( $thisHolder );
 					}
@@ -689,6 +691,7 @@
 					$repeaterContent.append( $row );
 					var innerHolder = $row.find( '.qodef-repeater-inner-wrapper' );
 					qodefRepeater.qodefAddNewRowInner( innerHolder, $mainHolder );
+					qodefRepeater.qodefToggleRowInner( innerHolder );
 					qodefRepeater.qodefRemoveRowInner( innerHolder );
 					qodefRepeater.qodefInitSortable( holder );
 					qodefDependency.reinitRepeater( $mainHolder );
@@ -701,10 +704,37 @@
 				}
 			);
 		},
+		qodefToggleRow: function ( holder ) {
+			var repeaterContent = holder.find( '.qodef-repeater-wrapper-main' );
+
+			repeaterContent.on(
+				'click',
+				'.qodef-row-toggle',
+				function ( e ) {
+					e.preventDefault();
+					e.stopPropagation();
+
+					var $rowParent  = $( this ).parents( '.qodef-repeater-fields-holder' ),
+						$rowContent = $rowParent.children( '.qodef-repeater-fields' );
+					$rowContent.stop().fadeToggle( 300 );
+
+					if ( $rowParent.hasClass( 'qodef--closed' ) ) {
+						$rowParent.removeClass( 'qodef--closed' );
+					} else {
+						setTimeout(
+							function () {
+								$rowParent.addClass( 'qodef--closed' );
+							},
+							300
+						);
+					}
+				}
+			);
+		},
 		qodefRemoveRow: function ( holder ) {
 			var repeaterContent = holder.find( '.qodef-repeater-wrapper-main' );
 
-			repeaterContent.off().on(
+			repeaterContent.on(
 				'click',
 				'.qodef-clone-remove',
 				function ( e ) {
@@ -752,10 +782,37 @@
 				}
 			);
 		},
+		qodefToggleRowInner: function ( holder ) {
+			var repeaterInnerContent = holder.find( '.qodef-repeater-inner-wrapper-main' );
+
+			repeaterInnerContent.on(
+				'click',
+				'.qodef-row-toggle',
+				function ( e ) {
+					e.preventDefault();
+					e.stopPropagation();
+
+					var $rowParent  = $( this ).parents( '.qodef-repeater-inner-fields-holder' ),
+						$rowContent = $rowParent.children( '.qodef-repeater-inner-fields' );
+					$rowContent.stop().fadeToggle( 300 );
+
+					if ( $rowParent.hasClass( 'qodef--closed' ) ) {
+						$rowParent.removeClass( 'qodef--closed' );
+					} else {
+						setTimeout(
+							function () {
+								$rowParent.addClass( 'qodef--closed' );
+							},
+							300
+						);
+					}
+				}
+			);
+		},
 		qodefRemoveRowInner: function ( holder ) {
 			var repeaterInnerContent = holder.find( '.qodef-repeater-inner-wrapper-main' );
 
-			repeaterInnerContent.off().on(
+			repeaterInnerContent.on(
 				'click',
 				'.qodef-clone-inner-remove',
 				function ( e ) {
@@ -800,7 +857,7 @@
 		}
 	};
 
-	qodefFramework.qodefPerfectScrollbar = qodefPerfectScrollbar;
+	qodefWooFramework.qodefPerfectScrollbar = qodefPerfectScrollbar;
 
 	var qodefReinitRepeaterFields = {
 		init: function () {
@@ -832,7 +889,7 @@
 				this.setActivePanel();
 				this.navigationReset();
 
-				if ( qodefFramework.windowWidth <= 1180 ) {
+				if ( qodefWooFramework.windowWidth <= 1180 ) {
 					this.mobile( this.adminPage );
 				}
 			}
@@ -842,7 +899,7 @@
 				$navigation      = $admin.find( '.qodef-tabs-navigation-wrapper' ),
 				$navigationInner = $admin.find( '.qodef-tabs-navigation-wrapper-inner' );
 
-			qodefFramework.qodefPerfectScrollbar.init( $navigationInner );
+			qodefWooFramework.qodefPerfectScrollbar.init( $navigationInner );
 
 			$opener.on(
 				'click tap',
@@ -898,7 +955,7 @@
 			this.adminPage = $( '.qodef-admin-page-v4' );
 			this.adminHeaderPosition();
 
-			if ( qodefFramework.windowWidth <= 1180 ) {
+			if ( qodefWooFramework.windowWidth <= 1180 ) {
 				this.mobile( this.adminPage );
 			}
 
@@ -965,12 +1022,12 @@
 
 				setTimeout(
 					function () {
-						qodefFramework.qodefColorPicker.checkFieldPosition( $newPane );
+						qodefWooFramework.qodefColorPicker.checkFieldPosition( $newPane );
 
 						$( document.body ).on(
 							'qode_quick_view_for_woocommerce_trigger_tab_change',
 							function () {
-								qodefFramework.qodefColorPicker.checkFieldPosition( $newPane );
+								qodefWooFramework.qodefColorPicker.checkFieldPosition( $newPane );
 							}
 						);
 					},
@@ -1090,7 +1147,7 @@
 			this.adminPage 	 = $( '.qodef-admin-page-v4' );
 			this.adminHeader = $( '.qodef-admin-header' );
 
-			if ( this.adminPage.length && this.adminHeader.length && qodefFramework.windowWidth > 600 ) {
+			if ( this.adminPage.length && this.adminHeader.length && qodefWooFramework.windowWidth > 600 ) {
 				this.adminBarHeight         = $( '#wpadminbar' ).height();
 				this.adminHeaderHeight      = this.adminHeader.outerHeight( true );
 				this.adminHeaderTopPosition = this.adminHeader.offset().top - parseInt( this.adminBarHeight );
@@ -1102,7 +1159,7 @@
 				$( window ).on(
 					'scroll load',
 					function () {
-						if ( qodefFramework.scroll >= qodefAdminOptionsPanel.adminHeaderTopPosition ) {
+						if ( qodefWooFramework.scroll >= qodefAdminOptionsPanel.adminHeaderTopPosition ) {
 							qodefAdminOptionsPanel.adminHeader.addClass( 'qodef-fixed' ).css(
 								'top',
 								parseInt( qodefAdminOptionsPanel.adminBarHeight )
@@ -1111,12 +1168,12 @@
 								'marginTop',
 								qodefAdminOptionsPanel.adminHeaderHeight
 							);
-							if ( qodefFramework.windowWidth > 1180 ) {
+							if ( qodefWooFramework.windowWidth > 1180 ) {
 								qodefAdminOptionsPanel.adminNavigation.css(
 									'marginTop',
 									0
 								);
-							} else if ( qodefFramework.windowWidth <= 1180 ) {
+							} else if ( qodefWooFramework.windowWidth <= 1180 ) {
 								qodefAdminOptionsPanel.adminNavigation.css(
 									'marginTop',
 									qodefAdminOptionsPanel.adminBarHeight + qodefAdminOptionsPanel.adminHeaderHeight
@@ -1131,15 +1188,15 @@
 								'marginTop',
 								0
 							);
-							if ( qodefFramework.windowWidth > 1180 ) {
+							if ( qodefWooFramework.windowWidth > 1180 ) {
 								qodefAdminOptionsPanel.adminNavigation.css(
 									'marginTop',
 									qodefAdminOptionsPanel.adminHeaderHeight
 								);
-							} else if ( qodefFramework.windowWidth <= 1180 ) {
+							} else if ( qodefWooFramework.windowWidth <= 1180 ) {
 								qodefAdminOptionsPanel.adminNavigation.css(
 									'marginTop',
-									qodefAdminOptionsPanel.adminHeader.offset().top + qodefAdminOptionsPanel.adminHeaderHeight - qodefFramework.scroll
+									qodefAdminOptionsPanel.adminHeader.offset().top + qodefAdminOptionsPanel.adminHeaderHeight - qodefWooFramework.scroll
 								);
 							}
 						}
@@ -1393,7 +1450,7 @@
 		}
 	};
 
-	qodefFramework.qodefInitMediaUploader = qodefInitMediaUploader;
+	qodefWooFramework.qodefInitMediaUploader = qodefInitMediaUploader;
 
 	var qodefColorPicker = {
 		init: function ( $mainHolder ) {
@@ -1440,7 +1497,7 @@
 		}
 	};
 
-	qodefFramework.qodefColorPicker = qodefColorPicker;
+	qodefWooFramework.qodefColorPicker = qodefColorPicker;
 
 	var qodefDatePicker = {
 		init: function ( $mainHolder ) {
@@ -1467,7 +1524,7 @@
 		}
 	};
 
-	qodefFramework.qodefDatePicker = qodefDatePicker;
+	qodefWooFramework.qodefDatePicker = qodefDatePicker;
 
 	var qodefSelect2 = {
 		init: function ( $mainHolder ) {
@@ -1502,7 +1559,7 @@
 		}
 	};
 
-	qodefFramework.select2 = qodefSelect2;
+	qodefWooFramework.select2 = qodefSelect2;
 
 	var qodefInitIconPicker = {
 		init: function ( $mainHolder ) {
@@ -1531,7 +1588,7 @@
 		}
 	};
 
-	qodefFramework.qodefInitIconPicker = qodefInitIconPicker;
+	qodefWooFramework.qodefInitIconPicker = qodefInitIconPicker;
 
 	var qodefAddressFields = {
 		init: function ( $mainHolder, trigger ) {
@@ -1637,7 +1694,7 @@
 		},
 	};
 
-	qodefFramework.qodefAddressFields = qodefAddressFields;
+	qodefWooFramework.qodefAddressFields = qodefAddressFields;
 
 	var qodefSearchOptions = {
 		init: function ( $adminPageHolder ) {
@@ -1715,7 +1772,7 @@
 		}
 	};
 
-	qodefFramework.qodefSearchOptions = qodefSearchOptions;
+	qodefWooFramework.qodefSearchOptions = qodefSearchOptions;
 
 	var qodefAdminScroll = {
 		disable: function () {
@@ -1826,7 +1883,7 @@
 		}
 	};
 
-	qodefFramework.qodefDragAndDropCheckboxFields = qodefDragAndDropCheckboxFields;
+	qodefWooFramework.qodefDragAndDropCheckboxFields = qodefDragAndDropCheckboxFields;
 
 	var qodefWidgetFields = {
 		initColorPicker: function ( $widget ) {
@@ -1858,7 +1915,7 @@
 			var $dependency = $widget.find( '.widget-content .qodef-widget-field[data-option-name]' );
 
 			if ( $dependency.length ) {
-				qodefFramework.qodefDependency.reinitWidget( $dependency );
+				qodefWooFramework.qodefDependency.reinitWidget( $dependency );
 			}
 		}
 	};

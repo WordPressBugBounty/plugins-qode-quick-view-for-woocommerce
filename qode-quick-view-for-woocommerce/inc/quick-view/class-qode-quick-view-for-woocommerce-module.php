@@ -332,8 +332,9 @@ if ( ! class_exists( 'Qode_Quick_View_For_WooCommerce_Module' ) ) {
 		public function get_quick_view_page_id() {
 			$post_id = get_the_ID();
 
-			if ( qode_quick_view_for_woocommerce_is_woo_page( 'archive' ) ) {
-				$shop_id = qode_quick_view_for_woocommerce_get_main_shop_page_id();
+			if ( ( function_exists( 'is_shop' ) && is_shop() ) || ( function_exists( 'is_product_category' ) && is_product_category() ) || ( function_exists( 'is_product_tag' ) && is_product_tag() ) ) {
+				// Get page id from options table.
+				$shop_id = get_option( 'woocommerce_shop_page_id' );
 
 				if ( ! empty( $shop_id ) ) {
 					$post_id = $shop_id;

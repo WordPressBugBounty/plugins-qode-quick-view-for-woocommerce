@@ -128,6 +128,9 @@ class Qode_Quick_View_For_WooCommerce_Framework_Field_Repeater implements Qode_Q
 							foreach ( $this->value as $row ) {
 								?>
 								<div class="qodef-repeater-fields-holder clearfix" data-index="<?php echo esc_attr( $counter ); ?>">
+									<h4 class="qodef-repeater-fields-label">
+										<?php echo esc_html__( 'Item ', 'qode-quick-view-for-woocommerce' ) . esc_html( $counter + 1 ); ?>
+									</h4>
 									<div class="qodef-repeater-fields">
 										<?php
 										foreach ( $this->children as $child ) {
@@ -153,6 +156,11 @@ class Qode_Quick_View_For_WooCommerce_Framework_Field_Repeater implements Qode_Q
 										?>
 									</div>
 									<div class="qodef-repeater-actions-holder">
+										<div class="qodef-repeater-toggle">
+											<a class="qodef-row-toggle" href="#">
+												<?php qode_quick_view_for_woocommerce_framework_svg_icon( 'toggle' ); ?>
+											</a>
+										</div>
 										<div class="qodef-repeater-sort">
 											<?php qode_quick_view_for_woocommerce_framework_svg_icon( 'expand' ); ?>
 										</div>
@@ -168,6 +176,9 @@ class Qode_Quick_View_For_WooCommerce_Framework_Field_Repeater implements Qode_Q
 						?>
 						<script type="text/html" class="qodef-repeater-template" id="tmpl-qodef-repeater-template-<?php echo esc_attr( str_replace( '_', '-', $this->name ) ); ?>">
 							<div class="qodef-repeater-fields-holder <?php echo esc_attr( $this->params['sortable_class'] ); ?> clearfix" data-index="{{{ data.rowIndex }}}">
+								<h4 class="qodef-repeater-fields-label">
+									<?php echo esc_html__( 'Item ', 'qode-quick-view-for-woocommerce' ); ?> {{{ data.rowIndex+1 }}}
+								</h4>
 								<div class="qodef-repeater-fields">
 									<?php
 									foreach ( $this->children as $child ) {
@@ -184,6 +195,11 @@ class Qode_Quick_View_For_WooCommerce_Framework_Field_Repeater implements Qode_Q
 									?>
 								</div>
 								<div class="qodef-repeater-actions-holder">
+									<div class="qodef-repeater-toggle">
+										<a class="qodef-row-toggle" href="#">
+											<?php qode_quick_view_for_woocommerce_framework_svg_icon( 'toggle' ); ?>
+										</a>
+									</div>
 									<div class="qodef-repeater-sort">
 										<?php qode_quick_view_for_woocommerce_framework_svg_icon( 'expand' ); ?>
 									</div>

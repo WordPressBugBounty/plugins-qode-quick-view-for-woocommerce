@@ -45,13 +45,13 @@ if ( ! class_exists( 'Qode_Quick_View_For_WooCommerce_Quick_View_Button_Block' )
 			return self::$instance;
 		}
 
-		public function dynamic_render_callback( $attributes ) {
+		public function dynamic_render_callback( $shortcode_atts ) {
 
 			if ( class_exists( 'Qode_Quick_View_For_WooCommerce_Quick_View_Button_Shortcode' ) ) {
 				ob_start();
 
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo qode_quick_view_for_woocommerce_framework_wp_kses_html( 'html', Qode_Quick_View_For_WooCommerce_Quick_View_Button_Shortcode::call_shortcode( $attributes ) );
+				echo Qode_Quick_View_For_WooCommerce_Quick_View_Button_Shortcode::call_shortcode( $shortcode_atts );
 
 				$html = ob_get_clean();
 			} else {

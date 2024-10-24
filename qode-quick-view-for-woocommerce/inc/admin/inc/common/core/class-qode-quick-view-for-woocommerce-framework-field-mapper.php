@@ -42,6 +42,7 @@ class Qode_Quick_View_For_WooCommerce_Framework_Field_Mapper implements Qode_Qui
 			}
 		}
 
+		// nosemgrep audit.php.wp.security.xss.shortcode-attr.
 		return $return_object;
 	}
 }

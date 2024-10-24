@@ -4,7 +4,7 @@ Tags: quick view, quickview, product quick view, woocommerce lightbox, product p
 Requires at least: 6.3
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.0.6
+Stable tag: 1.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -105,6 +105,7 @@ Feel free to try out some of our other products:
 <a href="https://wordpress.org/plugins/qode-variation-swatches-for-woocommerce/">QODE Variation Swatches for WooCommerce</a>
 <a href="https://wordpress.org/plugins/qode-compare-for-woocommerce/">QODE Compare for WooCommerce</a>
 <a href="https://wordpress.org/plugins/qode-product-extra-options-for-woocommerce/">QODE Product Extra Options for WooCommerce</a>
+<a href="https://wordpress.org/plugins/qode-optimizer/">QODE Optimizer</a>
 
 == Screenshots ==
 
@@ -118,6 +119,10 @@ Feel free to try out some of our other products:
 8. Quick View Pop-up Demo.
 
 == Changelog ==
+
+= 1.1 - 24-10-2024 =
+- Improved WordPress coding standards
+- Minor fixes
 
 = 1.0.6 - 14-10-2024 =
 - Improved framework

@@ -63,7 +63,23 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_get_template_
 
 		$template = qode_quick_view_for_woocommerce_framework_get_template_with_slug( $temp, $slug );
 
-		return qode_quick_view_for_woocommerce_framework_execute_template_with_params( $template, $params );
+		if ( ! empty( $template ) && file_exists( $template ) ) {
+			// Extract params so they could be used in template.
+			if ( is_array( $params ) && count( $params ) ) {
+				extract( $params, EXTR_SKIP ); // @codingStandardsIgnoreLine
+			}
+
+			ob_start();
+
+			// nosemgrep audit.php.lang.security.file.inclusion-arg.
+			include qode_quick_view_for_woocommerce_framework_get_template_with_slug( $temp, $slug );
+
+			$html = ob_get_clean();
+
+			return $html;
+		} else {
+			return '';
+		}
 	}
 }
 
@@ -94,36 +110,6 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_get_template_
 		}
 
 		return $template;
-	}
-}
-
-if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_execute_template_with_params' ) ) {
-	/**
-	 * Loads module template part.
-	 *
-	 * @param string $template path to template that is going to be included
-	 * @param array $params params that are passed to template
-	 *
-	 * @return string - template html
-	 */
-	function qode_quick_view_for_woocommerce_framework_execute_template_with_params( $template, $params ) {
-		if ( ! empty( $template ) && file_exists( $template ) ) {
-			// Extract params so they could be used in template.
-			if ( is_array( $params ) && count( $params ) ) {
-				extract( $params, EXTR_SKIP ); // @codingStandardsIgnoreLine
-			}
-
-			ob_start();
-
-			// nosemgrep audit.php.lang.security.file.inclusion-arg.
-			include $template;
-
-			$html = ob_get_clean();
-
-			return $html;
-		} else {
-			return '';
-		}
 	}
 }
 
@@ -169,6 +155,9 @@ if ( ! function_exists( 'qode_quick_view_for_woocommerce_framework_get_svg_icon'
 				break;
 			case 'opener':
 				$html = '<svg class="' . esc_attr( $class ) . '" xmlns="http://www.w3.org/2000/svg" width="25" height="16" viewBox="0 0 25 16"><g transform="translate(-24 -73)"><rect width="25" height="2" transform="translate(24 80)"/><rect width="25" height="2" transform="translate(24 73)"/><rect width="25" height="2" transform="translate(24 87)"/></g></svg>';
+				break;
+			case 'toggle':
+				$html = '<svg class="' . esc_attr( $class ) . '" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" xml:space="preserve"><path d="M12 7.515c-.3 0-.6-.3-.6-.6v-2.4H9c-.3 0-.6-.3-.6-.6s.3-.6.6-.6h3c.3 0 .6.3.6.6v3c0 .3-.3.6-.6.6zM7 12.615H4c-.3 0-.6-.3-.6-.6v-3c0-.3.3-.6.6-.6s.6.3.6.6v2.4H7c.3 0 .6.3.6.6s-.3.6-.6.6z"/><path d="M9 7.615c-.2 0-.3-.1-.4-.2-.2-.2-.2-.6 0-.8l3-3c.2-.2.6-.2.8 0 .2.2.2.6 0 .8l-3 3c-.1.1-.2.2-.4.2zM4 12.615c-.2 0-.3-.1-.4-.2-.2-.2-.2-.6 0-.8l3-3c.2-.2.6-.2.8 0 .2.2.2.6 0 .8l-3 3c-.1.1-.2.2-.4.2z"/><path d="M2 0h12c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H2c-1.1 0-2-.9-2-2V2C0 .9.9 0 2 0z" fill="none"/><path d="M2 1.2c-.4 0-.8.4-.8.8v12c0 .4.4.8.8.8h12c.4 0 .8-.4.8-.8V2c0-.4-.4-.8-.8-.8H2M2 0h12c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H2c-1.1 0-2-.9-2-2V2C0 .9.9 0 2 0z"/></svg>';
 				break;
 		}
 
