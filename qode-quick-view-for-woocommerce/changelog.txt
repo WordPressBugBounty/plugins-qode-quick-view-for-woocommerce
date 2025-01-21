@@ -1,6 +1,9 @@
 *** QODE Quick View for WooCommerce Changelog ***
 
-2024-10-24 - version 1.1
+2025-01-21 - version 1.1.2
+* Changed the pro plugin URL to point to the WooCommerce marketplace
+
+2024-10-24 - version 1.1.1
 * Fixed undefined constants
 
 2024-10-24 - version 1.1

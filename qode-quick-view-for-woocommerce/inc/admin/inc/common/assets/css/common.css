@@ -4235,7 +4235,6 @@ body.wp-admin.rtl .ui-datepicker {
 	overflow: hidden !important;
 	white-space: nowrap !important;
 	clip: rect(0 0 0 0) !important;
-	-webkit-clip-path: inset(50%) !important;
 	clip-path: inset(50%) !important;
 }
 
