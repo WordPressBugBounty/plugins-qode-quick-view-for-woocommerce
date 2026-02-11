@@ -70,8 +70,19 @@ if ( ! class_exists( 'Qode_Quick_View_For_WooCommerce_Admin_General_Page' ) ) {
 		public function plugin_action_links( $links ) {
 
 			if ( ! qode_quick_view_for_woocommerce_is_installed( 'quick-view-premium' ) ) {
+				$pro_plugin_url = 'https://qodeinteractive.com/products/plugins/qode-quick-view-for-woocommerce/?utm_source=dash&utm_medium=qodequickview&utm_campaign=gopremium';
+
+				if ( file_exists( QODE_QUICK_VIEW_FOR_WOOCOMMERCE_ABS_PATH . DIRECTORY_SEPARATOR . 'class-qode-quick-view-for-woocommerce.php' ) ) {
+					// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+					preg_match( '/(Woo:\s.*)/', file_get_contents( QODE_QUICK_VIEW_FOR_WOOCOMMERCE_ABS_PATH . DIRECTORY_SEPARATOR . 'class-qode-quick-view-for-woocommerce.php' ), $is_woocommerce_market );
+
+					if ( ! empty( $is_woocommerce_market ) ) {
+						$pro_plugin_url = 'https://woocommerce.com/products/qode-quick-view-pro/';
+					}
+				}
+
 				// translators: 1. Premium plugin url.
-				$links['premium'] = sprintf( '<a href="%1$s" target="_blank" class="qode-quick-view-for-woocommerce-premium-link" style="color:#ee2852;font-weight:700">%2$s</a>', 'https://woocommerce.com/products/qode-quick-view-pro/', esc_html__( 'Upgrade', 'qode-quick-view-for-woocommerce' ) );
+				$links['premium'] = sprintf( '<a href="%1$s" target="_blank" class="qode-quick-view-for-woocommerce-premium-link" style="color:#ee2852;font-weight:700">%2$s</a>', esc_url( $pro_plugin_url ), esc_html__( 'Upgrade', 'qode-quick-view-for-woocommerce' ) );
 			}
 
 			return $links;
